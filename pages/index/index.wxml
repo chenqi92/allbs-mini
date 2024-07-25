@@ -19,7 +19,7 @@
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/random{{PageCur=='random'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='random'?'text-green':'text-gray'}}">占位</view>
+    <view class="{{PageCur=='random'?'text-green':'text-gray'}}">热点</view>
   </view>
   <view class="action" bindtap="NavChange" data-cur="profile">
     <view class='cuIcon-cu-image'>
