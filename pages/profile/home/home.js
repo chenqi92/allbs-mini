@@ -1,5 +1,5 @@
-
 const app = getApp()
+const API = app.globalData.API_ENDPOINTS.PROFILE;
 Component({
   options: {
     addGlobalClass: true,
@@ -16,29 +16,45 @@ Component({
       mask: true,
     })
     let i = 0;
-    numDH();
-    function numDH() {
-      if (i < 20) {
-        setTimeout(function () {
-          that.setData({
-            fc: i,
-            sc: i,
-            tc: i
-          })
-          i++
-          numDH();
-        }, 20)
-      } else {
-        that.setData({
-          fc: that.coutNum(3000),
-          sc: that.coutNum(484),
-          tc: that.coutNum(24000)
-        })
-      }
-    }
+    that.numDH();
+    // function numDH() {
+    //   if (i < 20) {
+    //     setTimeout(function () {
+    //       that.setData({
+    //         fc: i,
+    //         sc: i,
+    //         tc: i
+    //       })
+    //       i++
+    //       numDH();
+    //     }, 20)
+    //   } else {
+    //
+    //     that.setData({
+    //       fc: that.coutNum(3000),
+    //       sc: that.coutNum(484),
+    //       tc: that.coutNum(24000)
+    //     })
+    //   }
+    // }
     wx.hideLoading()
   },
   methods: {
+    numDH() {
+      const _this = this;
+
+      app.$http.get(API.STATICS).then(res => {
+        if(res.ok) {
+          _this.setData({
+            fc: _this.coutNum(res.data.fc),
+            sc: _this.coutNum(res.data.sc),
+            tc: _this.coutNum(res.data.tc)
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     coutNum(e) {
       if (e > 1000 && e < 10000) {
         e = (e / 1000).toFixed(1) + 'k'

@@ -1,5 +1,6 @@
 //app.js
 import $http from '/utils/request.js'
+import {API_ENDPOINTS} from '/utils/api.js'
 App({
   onLaunch: function() {
     if (wx.cloud) {
@@ -19,6 +20,8 @@ App({
         }
       }
     })
+    // 将 API_ENDPOINTS 挂载到全局对象上
+    this.globalData.API_ENDPOINTS = API_ENDPOINTS;
   },
   globalData: {
     ColorList: [{

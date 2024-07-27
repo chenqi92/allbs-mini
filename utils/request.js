@@ -1,13 +1,10 @@
-const baseUrl = "https://wx.allbs.cn/";
-// 创建WxRequest类
-// 通过类的方式来进行封装，会让代码更加具有复用性
-// 也可以方便添加新的属性和方法
-class WxRequest {
+import { API_BASE_URL } from './api.js';
 
+class WxRequest {
     // 定义实例属性，用来设置默认请求参数
     defaults = {
         // 请求基地址
-        baseURL: baseUrl,
+        baseURL: API_BASE_URL,
         // 请求路径
         url: '',
         // 请求参数
@@ -34,13 +31,12 @@ class WxRequest {
 
         // 响应拦截器
         // 在服务器响应数据以后，对服务器响应的数据进行逻辑处理
-        response: (response) => response
+        response: (response) => response.data // 只返回 data 属性的值
     }
 
     // 定义数组队列
     // 初始值需要是一个空数组,用来存储请求队列\存储请求标识
     queue = []
-
 
     // 用于创建和初始化类的属性和方法
     // 在实例化时传入的参数，会被constructor形参进行接收
@@ -161,4 +157,6 @@ class WxRequest {
     }
 }
 
-export default WxRequest
+// 导出已实例化的 WxRequest 对象
+const wxRequestInstance = new WxRequest();
+export default wxRequestInstance;
