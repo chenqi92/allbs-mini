@@ -6,9 +6,9 @@ Component({
   data: {
     elements: [{
       title: '文件预览',
-      name: 'filePreview',
+      name: 'filepreview',
       color: 'cyan',
-      icon: 'newsfill'
+      icon: 'read'
     }
     ],
   }

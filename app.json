@@ -5,7 +5,9 @@
     "pages/random/home/home",
     "pages/toolbox/home/home",
     "pages/profile/home/home",
-    "pages/profile/log/log"
+    "pages/profile/log/log",
+    "pages/basics/filepreview/filepreview",
+    "pages/webview/webview"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

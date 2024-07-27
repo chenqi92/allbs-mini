@@ -9,7 +9,7 @@ Component({
         title: '文件预览',
         name: 'filePreview',
         color: 'purple',
-        icon: 'newsfill'
+        icon: 'read'
       }
     ],
   },

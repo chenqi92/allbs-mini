@@ -3,6 +3,7 @@
   "projectname": "allbs-wechat-mini",
   "setting": {
     "compileHotReLoad": true,
-    "bigPackageSizeSupport": true
+    "bigPackageSizeSupport": true,
+    "urlCheck": false
   }
 }
