@@ -1,6 +1,6 @@
 <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
     <swiper-item wx:for="{{4}}" wx:key>
-        <image src="https://nas.allbs.cn:9006/cloudpic/2024/07/2986b6f56057ee0402baad159b806643.png" mode='aspectFill'></image>
+        <image src="https://nas.allbs.cn:9006/cloudpic/cloudpic/2024/07/1f7989871649b61ed72a091147c271f1.png" mode='aspectFill'></image>
     </swiper-item>
 </swiper>
 <view class="VerticalBox">
