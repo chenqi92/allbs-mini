@@ -1,10 +1,15 @@
 // api.js
 const API_BASE_URL = "https://wx.allbs.cn/";
+const PREVIEW_BASE_URL = "https://preview.allbs.cn/onlinePreview?url=";
 
 const API_URLS = {
     PROFILE: {
         BASE: 'wx/statics',
         STATICS: 'profileStatics',
+    },
+    MINIO: {
+        BASE: 'minio',
+        UPLOAD: 'upload',
     },
     HOST: {
         BASE: 'wx/hot',
@@ -31,4 +36,4 @@ const createApiUrls = (urls) => {
 
 const API_ENDPOINTS = createApiUrls(API_URLS);
 
-export {API_BASE_URL, API_ENDPOINTS};
+export {API_BASE_URL, API_ENDPOINTS, PREVIEW_BASE_URL};

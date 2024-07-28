@@ -1,5 +1,6 @@
 // pages/basics/filepreview/filepreview.js
 const Base64 = require('../../../utils/base64.js');
+const app = getApp();
 
 Page({
   /**
@@ -76,24 +77,53 @@ Page({
         const tempFilePath = res.tempFiles[0].path;
         console.log('文件路径：', tempFilePath);
 
-        // 将文件路径进行 Base64 编码
-        const encodedUrl = Base64.encode(tempFilePath);
+        // 上传文件
+        wx.uploadFile({
+          url: app.globalData.API_BASE_URL + app.globalData.API_ENDPOINTS.MINIO.UPLOAD, // 替换为实际的上传文件接口地址
+          filePath: tempFilePath,
+          name: 'file',
+          success(uploadRes) {
+            const data = JSON.parse(uploadRes.data);
+            if (data.ok) { // 假设返回的 JSON 数据格式为 { code: 0, data: { url: 'https://...' } }
+              const fileUrl = data.data.url;
+              console.log('上传成功，文件URL：', fileUrl);
 
-        // 生成新的链接
-        const previewUrl = 'https://preview.allbs.cn/onlinePreview?url=' + encodeURIComponent(encodedUrl);
-        console.log('预览链接：', previewUrl);
+              // 将文件 URL 进行 Base64 编码
+              const encodedUrl = Base64.encode(fileUrl);
 
-        // 打开新页面加载该链接
-        wx.navigateTo({
-          url: '/pages/webview/webview?url=' + encodeURIComponent(previewUrl)
-        });
+              // 生成新的预览链接
+              const previewUrl = app.globalData.PREVIEW_BASE_URL + encodeURIComponent(encodedUrl);
+              console.log('预览链接：', previewUrl);
 
-        // 将链接复制到剪贴板
-        wx.setClipboardData({
-          data: previewUrl,
-          success() {
+              // 打开新页面加载该链接
+              wx.navigateTo({
+                url: '/pages/webview/webview?url=' + encodeURIComponent(previewUrl)
+              });
+
+              // 将链接复制到剪贴板
+              wx.setClipboardData({
+                data: previewUrl,
+                success() {
+                  wx.showToast({
+                    title: '链接已复制',
+                    duration: 2000
+                  });
+                }
+              });
+            } else {
+              console.error('上传失败：', data.message);
+              wx.showToast({
+                title: '上传失败',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+          },
+          fail(uploadErr) {
+            console.error('上传失败：', uploadErr);
             wx.showToast({
-              title: '链接已复制',
+              title: '上传失败',
+              icon: 'none',
               duration: 2000
             });
           }

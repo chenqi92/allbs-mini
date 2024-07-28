@@ -1,12 +1,12 @@
 {
   "name": "allbs-mini",
   "version": "1.0.0",
-  "description": "",
+  "description": "不常用得小工具",
   "main": ".eslintrc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "ChenQi",
   "license": "ISC",
   "dependencies": {
     "js-base64": "^3.7.7"

@@ -17,26 +17,6 @@ Component({
     })
     let i = 0;
     that.numDH();
-    // function numDH() {
-    //   if (i < 20) {
-    //     setTimeout(function () {
-    //       that.setData({
-    //         fc: i,
-    //         sc: i,
-    //         tc: i
-    //       })
-    //       i++
-    //       numDH();
-    //     }, 20)
-    //   } else {
-    //
-    //     that.setData({
-    //       fc: that.coutNum(3000),
-    //       sc: that.coutNum(484),
-    //       tc: that.coutNum(24000)
-    //     })
-    //   }
-    // }
     wx.hideLoading()
   },
   methods: {
@@ -46,16 +26,16 @@ Component({
       app.$http.get(API.STATICS).then(res => {
         if(res.ok) {
           _this.setData({
-            fc: _this.coutNum(res.data.fc),
-            sc: _this.coutNum(res.data.sc),
-            tc: _this.coutNum(res.data.tc)
+            fc: _this.countNum(res.data.fc),
+            sc: _this.countNum(res.data.sc),
+            tc: _this.countNum(res.data.tc)
           })
         }
       }).catch(err => {
         console.log(err);
       })
     },
-    coutNum(e) {
+    countNum(e) {
       if (e > 1000 && e < 10000) {
         e = (e / 1000).toFixed(1) + 'k'
       }
