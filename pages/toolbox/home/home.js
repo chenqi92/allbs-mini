@@ -7,9 +7,10 @@ Component({
     elements: [
       {
         title: '文件预览',
-        name: 'filePreview',
+        name: 'filepreview',
         color: 'purple',
-        icon: 'read'
+        icon: 'read',
+        model: 'basics'
       }
     ],
   },
