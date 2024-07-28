@@ -116,25 +116,37 @@ class WxRequest {
         })
     }
 
-    /*
-        封装GET实例方法
-    */
+    /**
+     * 封装GET实例方法
+     * @param url
+     * @param data
+     * @param config
+     * @returns {Promise<unknown>}
+     */
     get(url, data = {}, config = {}) {
         // 需要调用request请求方法发送请求，只需要组织好参数，传递给request请求方法即可
         //  当调用get方法时，需要将request方法的返回值return出去
         return this.request(Object.assign({url, data, method: 'GET'}, config))
     }
 
-    /*
-        封装POST实例方法
-    */
+    /**
+     * 封装POST实例方法
+     * @param url
+     * @param data
+     * @param config
+     * @returns {Promise<unknown>}
+     */
     post(url, data = {}, config = {}) {
         return this.request(Object.assign({url, data, method: 'POST'}, config))
     }
 
-    /*
-        封装DELETE实例方法
-    */
+    /**
+     * 封装DELETE实例方法
+     * @param url
+     * @param data
+     * @param config
+     * @returns {Promise<unknown>}
+     */
     delete(url, data = {}, config = {}) {
         return this.request(Object.assign({url, data, method: 'DELETE'}, config))
     }
@@ -146,9 +158,11 @@ class WxRequest {
         return this.request(Object.assign({url, data, method: 'PUT'}, config))
     }
 
-    /*
-      封装all方法用来处理并发请求
-    */
+    /**
+     * 封装all方法
+     * @param promise
+     * @returns {Promise<Awaited<unknown>[]>}
+     */
     all(...promise) {
         console.log(promise)
         //  通过展开运算符接受传递的参数

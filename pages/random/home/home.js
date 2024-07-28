@@ -1,7 +1,8 @@
-const app = getApp()
+const app = getApp();
+const API = app.globalData.API_ENDPOINTS.HOT;
+
 Component({
     options: {
-        // 组件的属性列表
         addGlobalClass: true,
     },
     data: {
@@ -10,37 +11,32 @@ Component({
         MainCur: 0,
         VerticalNavTop: 0,
         list: [],
-        load: true
+        load: true,
+        hotNewsList: [],
+        hasMore: true,
     },
-    attached: function () {
+    attached() {
         let that = this;
-        // 生命周期函数--在组件实例进入页面节点树时执行
         wx.showLoading({
             title: '加载中...',
             mask: true
         });
-        let list = [{}];
-        for (let i = 0; i < 26; i++) {
-            list[i] = {};
-            list[i].name = String.fromCharCode(65 + i);
-            list[i].id = i;
-        }
-        that.setData({
-            list: list,
-            listCur: list[0]
-        });
+        that.sideBarList();
     },
-    ready: function () {
-        // 生命周期函数--在组件布局完成后执行
+    ready() {
         wx.hideLoading();
     },
     methods: {
         tabSelect(e) {
+            const id = e.currentTarget.dataset.id;
             this.setData({
-                TabCur: e.currentTarget.dataset.id,
-                MainCur: e.currentTarget.dataset.id,
-                VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
+                TabCur: id,
+                MainCur: id,
+                VerticalNavTop: (id - 1) * 50,
+                hotNewsList: [],
+                hasMore: true,
             });
+            this.queryHotNews(this.data.list[id].path, true);
         },
         VerticalMain(e) {
             let that = this;
@@ -69,10 +65,60 @@ Component({
                         VerticalNavTop: (list[i].id - 1) * 50,
                         TabCur: list[i].id
                     });
+                    if (i !== that.data.MainCur) {
+                        that.setData({ MainCur: i });
+                        that.queryHotNews(list[i].path, false);
+                    }
                     return false;
                 }
             }
+        },
+        sideBarList() {
+            const _this = this;
+            app.$http.get(API.SIDE_BAR_LIST).then(res => {
+                if (res.ok) {
+                    let list = res.data.filter(item => item.path).reverse();
+                    _this.setData({
+                        list: list,
+                        TabCur: 0,
+                        MainCur: 0,
+                    });
+                    _this.queryHotNews(list[0].path, true);
+                    wx.hideLoading();
+                }
+            }).catch(err => {
+                console.log(err);
+                wx.hideLoading();
+            });
+        },
+        queryHotNews(path, reset = false) {
+            const _this = this;
+            if (this.data.hasMore) {
+                app.$http.get(API.GET_HOT_NEWS, { "path": path }).then(res => {
+                    if (res.ok) {
+                        const newList = res.data;
+                        const hotNewsList = reset ? newList : _this.data.hotNewsList.concat(newList);
+                        _this.setData({
+                            hotNewsList: hotNewsList,
+                            hasMore: false
+                        });
+                    }
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+        },
+        loadMoreNews() {
+            if (this.data.hasMore) {
+                const currentPath = this.data.list[this.data.TabCur].path;
+                this.queryHotNews(currentPath, false);
+            }
+        },
+        formatTime(timestamp) {
+            const date = new Date(timestamp);
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
         }
     }
 });
-
