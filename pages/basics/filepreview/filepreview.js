@@ -95,18 +95,18 @@ Page({
               const previewUrl = app.globalData.PREVIEW_BASE_URL + encodeURIComponent(encodedUrl);
               console.log('预览链接：', previewUrl);
 
-              // 打开新页面加载该链接
-              wx.navigateTo({
-                url: '/pages/webview/webview?url=' + encodeURIComponent(previewUrl)
-              });
+              // 打开新页面加载该链接 没有企业认证，暂时注释掉
+              // wx.navigateTo({
+              //   url: '/pages/webview/webview?url=' + encodeURIComponent(previewUrl)
+              // });
 
               // 将链接复制到剪贴板
               wx.setClipboardData({
                 data: previewUrl,
                 success() {
                   wx.showToast({
-                    title: '链接已复制',
-                    duration: 2000
+                    title: '链接已复制，请打开手机浏览器粘贴后查看文件',
+                    duration: 3000
                   });
                 }
               });
