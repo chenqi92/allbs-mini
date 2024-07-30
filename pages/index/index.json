@@ -2,7 +2,7 @@
   "usingComponents": {
     "basics": "/pages/basics/home/home",
     "toolbox": "/pages/toolbox/home/home",
-    "random": "/pages/random/home/home",
+    "random": "/pages/game/home/home",
     "profile": "/pages/profile/home/home"
   }
 }
