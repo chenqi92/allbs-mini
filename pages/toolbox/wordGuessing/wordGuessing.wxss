@@ -1,0 +1,112 @@
+//page {
+//  font-family: Arial, sans-serif;
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  height: 100vh;
+//  margin: 0;
+//  background-color: #f0f0f0;
+//}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20rpx;
+  box-shadow: 0 0 10rpx rgba(0,0,0,0.1);
+  text-align: center;
+  width: 90%;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.difficulty button {
+  margin: 5rpx;
+  padding: 10rpx 15rpx;
+  font-size: 28rpx;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5rpx;
+  transition: background-color 0.3s;
+}
+
+.difficulty button:hover {
+  background-color: #45a049;
+}
+
+.difficulty button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.word-display {
+  font-size: 48rpx;
+  margin: 20rpx 0;
+  letter-spacing: 10rpx;
+}
+
+.guesses {
+  margin: 20rpx 0;
+}
+
+.alphabet button {
+  margin: 5rpx;
+  padding: 10rpx 15rpx;
+  font-size: 28rpx;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5rpx;
+  transition: background-color 0.3s;
+}
+
+.alphabet button:hover {
+  background-color: #45a049;
+}
+
+.alphabet button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.message {
+  font-weight: bold;
+  margin-top: 20rpx;
+}
+
+.score {
+  margin-top: 20rpx;
+}
+
+#hint-btn {
+  margin-top: 10rpx;
+  padding: 10rpx 15rpx;
+  font-size: 28rpx;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5rpx;
+  transition: background-color 0.3s;
+}
+
+#hint-btn:hover {
+  background-color: #45a049;
+}
+
+#hint-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

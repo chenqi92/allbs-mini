@@ -96,9 +96,9 @@ Page({
               console.log('预览链接：', previewUrl);
 
               // 打开新页面加载该链接 没有企业认证，暂时注释掉
-              // wx.navigateTo({
-              //   url: '/pages/webview/webview?url=' + encodeURIComponent(previewUrl)
-              // });
+              wx.navigateTo({
+                url: '/pages/webview/webview?url=' + encodeURIComponent(previewUrl)
+              });
 
               // 将链接复制到剪贴板
               wx.setClipboardData({
