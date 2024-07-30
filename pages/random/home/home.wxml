@@ -10,7 +10,7 @@
         </view>
     </scroll-view>
     <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx - 147rpx)" bindscroll="VerticalMain">
-        <view class="padding-top padding-lr" wx:for="{{hotNewsList}}" wx:key="id">
+        <view class="padding-top padding-lr padding-lrr" wx:for="{{hotNewsList}}" wx:key="id">
             <view class="cu-card article no-card}}">
                 <view class="cu-item shadow">
                     <view class="title">
@@ -21,8 +21,8 @@
                         <view class="desc" wx:if="{{item.desc}}">
                             <view class="text-content"> {{item.desc}}</view>
                             <view>
-<!--                                <view class="cu-tag bg-red light sm round">{{item.sort}}</view>-->
-<!--                                <view class="cu-tag bg-green light sm round">{{item.timestamp}}</view>-->
+<!--                                <view class="cu-tag bg-red light sm round">热度</view>-->
+<!--                                <view class="cu-tag bg-green light sm round">{{item.hot}}</view>-->
                             </view>
                         </view>
                     </view>

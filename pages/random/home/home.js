@@ -47,9 +47,9 @@ Component({
                     view.fields({
                         size: true
                     }, data => {
-                        list[i].top = tabHeight;
-                        tabHeight = tabHeight + data.height;
-                        list[i].bottom = tabHeight;
+                        // list[i].top = tabHeight;
+                        // tabHeight = tabHeight + data.height;
+                        // list[i].bottom = tabHeight;
                     }).exec();
                 }
                 that.setData({
