@@ -1,6 +1,6 @@
 <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
     <swiper-item wx:for="{{4}}" wx:key>
-        <image src="https://nas.allbs.cn:9006/cloudpic/2024/07/2986b6f56057ee0402baad159b806643.png" mode='aspectFill'></image>
+        <image src="https://nas.allbs.cn:9006/cloudpic/2024/07/9ae49ec2c315fbef843f218453c66011.jpg" mode='aspectFill'></image>
     </swiper-item>
 </swiper>
 <view class="VerticalBox">
@@ -9,25 +9,22 @@
             {{item.chineseName}}
         </view>
     </scroll-view>
-    <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx - 147rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain" bindscrolltolower="loadMoreNews">
-        <view class="padding-top padding-lr" wx:for="{{list}}" wx:key id="main-{{index}}">
-            <view class='cu-bar solid-bottom bg-white'>
-                <view class='action'>
-                    <text class='cuIcon-title text-green'></text> {{item.chineseName}} </view>
-            </view>
-            <view class="cu-list menu-avatar" wx:for="{{hotNewsList}}" wx:key="id">
-                <view class="cu-item">
-                    <view class="content">
-                        <view class="text-pink">
-                            <text class="text-cut">{{item.title}}</text>
-                        </view>
-                        <view class="text-gray text-sm flex">
-                            <text class="text-cut">{{item.desc}}</text>
-                        </view>
+    <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx - 147rpx)" bindscroll="VerticalMain">
+        <view class="padding-top padding-lr" wx:for="{{hotNewsList}}" wx:key="id">
+            <view class="cu-card article no-card}}">
+                <view class="cu-item shadow">
+                    <view class="title">
+                        <view class="text-cut">{{item.title}}</view>
                     </view>
-                    <view class="action">
-                        <view class="text-grey text-xs">{{formatTime(item.timestamp)}}</view>
-                        <view class="cu-tag round bg-red sm">{{index + 1}}</view>
+                    <view class="content">
+                        <image wx:if="{{item.cover}}" src="{{item.cover}}" mode="aspectFill"></image>
+                        <view class="desc" wx:if="{{item.desc}}">
+                            <view class="text-content"> {{item.desc}}</view>
+                            <view>
+<!--                                <view class="cu-tag bg-red light sm round">{{item.sort}}</view>-->
+<!--                                <view class="cu-tag bg-green light sm round">{{item.timestamp}}</view>-->
+                            </view>
+                        </view>
                     </view>
                 </view>
             </view>

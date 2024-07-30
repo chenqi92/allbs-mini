@@ -16,12 +16,11 @@ Component({
         hasMore: true,
     },
     attached() {
-        let that = this;
         wx.showLoading({
             title: '加载中...',
             mask: true
         });
-        that.sideBarList();
+        this.sideBarList();
     },
     ready() {
         wx.hideLoading();
@@ -36,7 +35,7 @@ Component({
                 hotNewsList: [],
                 hasMore: true,
             });
-            this.queryHotNews(this.data.list[id].path, true);
+            this.queryHotNews(this.data.list[id].name, true);
         },
         VerticalMain(e) {
             let that = this;
@@ -77,13 +76,12 @@ Component({
             const _this = this;
             app.$http.get(API.SIDE_BAR_LIST).then(res => {
                 if (res.ok) {
-                    let list = res.data.filter(item => item.path).reverse();
                     _this.setData({
-                        list: list,
+                        list: res.data,
                         TabCur: 0,
                         MainCur: 0,
                     });
-                    _this.queryHotNews(list[0].path, true);
+                    _this.queryHotNews(res.data[0].name, true);
                     wx.hideLoading();
                 }
             }).catch(err => {
@@ -91,27 +89,20 @@ Component({
                 wx.hideLoading();
             });
         },
-        queryHotNews(path, reset = false) {
+        queryHotNews(name, reset = false) {
             const _this = this;
             if (this.data.hasMore) {
-                app.$http.get(API.GET_HOT_NEWS, { "path": path }).then(res => {
+                app.$http.get(`${API.GET_HOT_NEWS}/${name}`).then(res => {
                     if (res.ok) {
                         const newList = res.data;
-                        const hotNewsList = reset ? newList : _this.data.hotNewsList.concat(newList);
                         _this.setData({
-                            hotNewsList: hotNewsList,
+                            hotNewsList: newList,
                             hasMore: false
                         });
                     }
                 }).catch(err => {
                     console.log(err);
                 });
-            }
-        },
-        loadMoreNews() {
-            if (this.data.hasMore) {
-                const currentPath = this.data.list[this.data.TabCur].path;
-                this.queryHotNews(currentPath, false);
             }
         },
         formatTime(timestamp) {
