@@ -1,5 +1,7 @@
-<cu-custom bgColor="bg-gradual-green" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">文件预览</view></cu-custom>
-<view class='margin-xl bg-white padding-xl radius shadow-lg'>
+<cu-custom bgColor="{{bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{title}}</view>
+</cu-custom><view class='margin-xl bg-white padding-xl radius shadow-lg'>
   <view class='text-center margin-bottom text-lg  text-grey'>关于文件预览得说明</view>
   <view class='text-content'>
     <view class='margin-top-sm'>1.首要注意事项说明:</view>

@@ -7,7 +7,8 @@
     "pages/profile/log/log",
     "pages/basics/filepreview/filepreview",
     "pages/webview/webview",
-    "pages/game/home/home"
+    "pages/game/home/home",
+    "pages/toolbox/wordGuessing/wordGuessing"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

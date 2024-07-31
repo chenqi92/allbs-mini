@@ -14,13 +14,21 @@ Page({
     wordDisplay: '',
     guesses: '',
     alphabet: [],
-    message: ''
+    message: '',
+    bgColor: '',
+    title: ''
   },
 
-  onLoad() {
+  onLoad(options) {
+    // 页面已经准备好，可以执行一些额外的初始化操作
+    const { title, color } = options;
+    // 动态设置 bgColor 和 itemName
+    this.setData({
+      bgColor: `bg-gradual-${color}`,
+      title: title
+    });
     this.newGame();
   },
-
   setDifficulty(e) {
     const difficulty = e.currentTarget.dataset.difficulty;
     this.setData({

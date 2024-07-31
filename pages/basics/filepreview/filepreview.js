@@ -6,13 +6,22 @@ Page({
     /**
      * 页面的初始数据
      */
-    data: {},
+    data: {
+        bgColor: '',
+        title: ''
+    },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        // 页面已经准备好，可以执行一些额外的初始化操作
+        const { title, color } = options;
+        // 动态设置 bgColor 和 itemName
+        this.setData({
+            bgColor: `bg-gradual-${color}`,
+            title: title
+        });
     },
 
     /**

@@ -1,6 +1,9 @@
+<cu-custom bgColor="{{bgColor}}" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">{{title}}</view>
+</cu-custom>
 <view class="container">
     <view class="game-container">
-        <text class="title">Hangman Game</text>
         <view class="difficulty">
             <button bindtap="setDifficulty" data-difficulty="easy">简单</button>
             <button bindtap="setDifficulty" data-difficulty="medium">中等</button>
