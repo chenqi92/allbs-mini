@@ -2,9 +2,9 @@
     <view class="game-container">
         <text class="title">Hangman Game</text>
         <view class="difficulty">
-            <button bindtap="setDifficulty" data-difficulty="easy">Easy</button>
-            <button bindtap="setDifficulty" data-difficulty="medium">Medium</button>
-            <button bindtap="setDifficulty" data-difficulty="hard">Hard</button>
+            <button bindtap="setDifficulty" data-difficulty="easy">简单</button>
+            <button bindtap="setDifficulty" data-difficulty="medium">中等</button>
+            <button bindtap="setDifficulty" data-difficulty="hard">困难</button>
         </view>
         <canvas canvas-id="hangmanCanvas" style="width: 100%; height: 300rpx;"></canvas>
         <text id="word-display" class="word-display">{{wordDisplay}}</text>
@@ -14,9 +14,9 @@
                 <button bindtap="guessLetter" data-letter="{{item}}" disabled="{{guessedLetters.indexOf(item) !== -1}}">{{item}}</button>
             </block>
         </view>
-        <button bindtap="showHint" id="hint-btn">Get Hint</button>
+        <button bindtap="showHint" id="hint-btn">提示</button>
         <text id="message" class="message">{{message}}</text>
-        <text id="score" class="score">Wins: {{wins}} | Losses: {{losses}}</text>
-        <button bindtap="newGame">New Game</button>
+        <text id="score" class="score">赢: {{wins}} | 输: {{losses}}</text>
+        <button bindtap="newGame">重开</button>
     </view>
 </view>

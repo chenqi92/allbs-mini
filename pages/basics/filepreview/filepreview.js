@@ -70,13 +70,15 @@ Page({
    * 文件预览按钮点击处理函数
    */
   handleFilePreview() {
+    const _this = this;
     wx.chooseMessageFile({
       count: 1,
       type: 'file',
       success(res) {
         const tempFilePath = res.tempFiles[0].path;
-        console.log('文件路径：', tempFilePath);
-
+        _this.setData({
+          loadModal: true
+        })
         // 上传文件
         wx.uploadFile({
           url: app.globalData.API_BASE_URL + app.globalData.API_ENDPOINTS.MINIO.UPLOAD, // 替换为实际的上传文件接口地址
@@ -95,19 +97,27 @@ Page({
               const previewUrl = app.globalData.PREVIEW_BASE_URL + encodeURIComponent(encodedUrl);
               console.log('预览链接：', previewUrl);
 
+              _this.setData({
+                loadModal: false
+              })
+
               // 打开新页面加载该链接 没有企业认证，暂时注释掉
-              wx.navigateTo({
-                url: '/pages/webview/webview?url=' + encodeURIComponent(previewUrl)
-              });
+              // wx.navigateTo({
+              //   url: '/pages/webview/webview?url=' + encodeURIComponent(previewUrl)
+              // });
 
               // 将链接复制到剪贴板
               wx.setClipboardData({
                 data: previewUrl,
                 success() {
-                  wx.showToast({
-                    title: '链接已复制，请打开手机浏览器粘贴后查看文件',
-                    duration: 3000
-                  });
+                  _this.setData({
+                    previewUrl: previewUrl
+                  })
+                  _this.showModal();
+                  // wx.showToast({
+                  //   title: '链接已复制，请打开手机浏览器粘贴后查看文件',
+                  //   duration: 3000
+                  // });
                 }
               });
             } else {
@@ -117,6 +127,9 @@ Page({
                 icon: 'none',
                 duration: 2000
               });
+              _this.setData({
+                loadModal: false
+              })
             }
           },
           fail(uploadErr) {
@@ -126,13 +139,26 @@ Page({
               icon: 'none',
               duration: 2000
             });
+            _this.setData({
+              loadModal: false
+            })
           }
         });
       },
       fail(err) {
         console.error('选择文件失败：', err);
-      }
+      },
     });
-  }
+  },
+  showModal(e) {
+    this.setData({
+      modalName: 'Modal'
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
 });
 

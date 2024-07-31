@@ -1,7 +1,7 @@
 <scroll-view scroll-y class="scrollPage">
     <view class="UCenter-bg">
 <!--        <image src="https://nas.allbs.cn:9006/cloudpic/cloudpic/2024/07/88af384e698c5b47819c8be2bb3f33b8.png" class="png" mode="widthFix"></image>-->
-        <view class="cu-avatar round margin-left" style="background-image:url('https://nas.allbs.cn:9006/cloudpic/cloudpic/2024/07/88af384e698c5b47819c8be2bb3f33b8.png');"></view>
+        <view class="cu-avatar round margin-left"></view>
         <view class="text-xl margin-top">不常用的小工具
             <text class="text-df">v1.0</text>
         </view>

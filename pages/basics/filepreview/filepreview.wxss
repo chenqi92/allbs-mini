@@ -1,4 +1,10 @@
 /* pages/basics/filepreview/filepreview.wxss */
 .inline {
-    display: inline;
-  }
+  display: inline;
+}
+.url-format {
+  padding: 50rpx;
+  word-break: break-word; /* 确保长单词在必要时断行 */
+  white-space: normal;    /* 允许文本换行 */
+  overflow-wrap: break-word; /* 确保长单词在必要时断行 */
+}
