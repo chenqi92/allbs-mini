@@ -1,6 +1,19 @@
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .UCenter-bg {
-  background-image: url("https://nas.allbs.cn:9006/cloudpic/2024/07/7b6ff7b6ed094117ef2ee7c2cca11161.png");
-  background-size: cover;
+  background: linear-gradient(270deg, #C7E1F0, #96C4E6, #194D5B, #E560CD, #FAAE4E);
+  background-size: 1000% 1000%; /* 让背景图的尺寸比容器大 */
+  animation: gradientAnimation 15s ease infinite; /* 动画持续时间和效果 */
   height: 550rpx;
   display: flex;
   justify-content: center;
@@ -23,7 +36,7 @@
   height: 200rpx;
 }
 
-.UCenter-bg .gif-wave{
+.UCenter-bg .gif-wave {
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -33,17 +46,18 @@
   height: 100rpx;
 }
 
-map,.mapBox{
+map, .mapBox {
   left: 0;
   z-index: 99;
   mix-blend-mode: screen;
   height: 100rpx;
 }
 
-map,.mapBox{
+map, .mapBox {
   width: 750rpx;
   height: 300rpx;
 }
+
 .cu-avatar {
   font-variant: small-caps;
   margin: 0;
