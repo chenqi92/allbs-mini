@@ -15,19 +15,19 @@
 </button>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->
-  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <image src='https://nas.allbs.cn:9006/cloudpic/cloudpic/2024/07/88af384e698c5b47819c8be2bb3f33b8.png' class='png' mode='aspectFit'></image>
   <view class='gray-text'>上传文件并解析...</view>
 </view>
 <view class="cu-modal {{modalName=='Modal'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
-      <view class="content">手机浏览器粘贴后查看文件</view>
+      <view class="content">解析成功</view>
       <view class="action" bindtap="hideModal">
         <text class="cuIcon-close text-red"></text>
       </view>
     </view>
     <view class="padding-xl url-format">
-      {{previewUrl}}
+      已自动复制到粘贴板中,请打开手机浏览器粘贴至地址栏中查看
     </view>
   </view>
 </view>
