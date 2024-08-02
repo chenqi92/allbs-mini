@@ -3,22 +3,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
 }
 
 button {
-  margin-top: 10px;
-  width: 200px;
-  padding: 5px;
+  margin-top: 20rpx;
+  width: 300rpx;
+  height: 80rpx;
   background: transparent;
-  border-width: 2px;
-  font-size: 15px;
+  border-width: 4rpx;
+  font-size: 30rpx;
   border-color: black;
   color: black;
   font-weight: bold;
   user-select: none;
-  border-radius: 10px;
-  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 20rpx;
+  box-shadow: 4rpx 4rpx 0px 0px rgba(0, 0, 0, 0.75);
 }
 
 button:hover {
@@ -29,5 +28,5 @@ button:hover {
 
 button:active {
   background: rgb(65, 65, 65);
-  box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2rpx 2rpx 0px 0px rgba(0, 0, 0, 0.75);
 }
