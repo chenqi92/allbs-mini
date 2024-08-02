@@ -4,9 +4,9 @@
   flex-direction: column;
   align-items: center;
 }
-.container .button {
-  display: flex;
+.container .margin-left {
+  margin-left: 10rpx;
 }
-.container .button button {
-  margin-left: 20rpx;
+.container .margin-right {
+  margin-right: 10rpx;
 }
