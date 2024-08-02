@@ -174,7 +174,7 @@ Page({
             rightNoseCenterX: randomFromInterval(this.data.faceWidth / 18, this.data.faceWidth / 12),
             rightNoseCenterY: randomFromInterval(0, this.data.faceHeight / 5),
             leftNoseCenterX: randomFromInterval(-this.data.faceWidth / 18, -this.data.faceWidth / 12),
-            leftNoseCenterY: this.data.rightNoseCenterY + randomFromInterval(-this.data.faceHeight / 30, this.data.faceHeight / 20)
+            leftNoseCenterY: this.data.rightNoseCenterY + randomFromInterval(-this.data.faceHeight / 30, this.data.faceHeight / 30) // 控制高度差在一个小范围内
         });
 
         if (Math.random() > 0.1) {
