@@ -2,12 +2,14 @@
   "pages": [
     "pages/index/index",
     "pages/basics/home/home",
-    "pages/random/home/home",
     "pages/toolbox/home/home",
     "pages/profile/home/home",
     "pages/profile/log/log",
-    "pages/basics/filepreview/filepreview",
-    "pages/webview/webview"
+    "pages/basics/filePreview/filePreview",
+    "pages/webview/webview",
+    "pages/game/pullTheRope/pullTheRope",
+    "pages/toolbox/wordGuessing/wordGuessing",
+    "pages/toolbox/uglyAvatar/uglyAvatar"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

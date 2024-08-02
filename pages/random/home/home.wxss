@@ -35,3 +35,15 @@
 .VerticalMain{
   background-color: #f1f1f1;
 }
+.padding-lrr {
+  padding-right: 200rpx;
+}
+.cu-card.article>.cu-item .content>image {
+  width: 180rpx;
+  height: 4.6em;
+  margin-right: 20rpx;
+  border-radius: 6rpx;
+}
+.padding-top {
+  padding-top: 20rpx;
+}

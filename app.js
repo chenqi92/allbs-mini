@@ -1,6 +1,8 @@
 //app.js
 import $http from '/utils/request.js'
 import {API_ENDPOINTS, PREVIEW_BASE_URL, API_BASE_URL} from '/utils/api.js'
+import utils from '/utils/util.js';
+
 App({
   onLaunch: function() {
     if (wx.cloud) {
@@ -24,6 +26,8 @@ App({
     this.globalData.API_BASE_URL = API_BASE_URL;
     this.globalData.API_ENDPOINTS = API_ENDPOINTS;
     this.globalData.PREVIEW_BASE_URL = PREVIEW_BASE_URL;
+    // 将 utils 挂载到全局对象上
+    this.globalData.utils = utils;
   },
   globalData: {
     ColorList: [{

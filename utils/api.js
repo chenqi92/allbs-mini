@@ -11,9 +11,10 @@ const API_URLS = {
         BASE: 'minio',
         UPLOAD: 'upload',
     },
-    HOST: {
+    HOT: {
         BASE: 'wx/hot',
         SIDE_BAR_LIST: 'sideBarList',
+        GET_HOT_NEWS: 'getHotNews'
     },
     // 更多模块
 };

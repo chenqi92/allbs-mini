@@ -1,0 +1,14 @@
+<cu-custom bgColor="{{bgColor}}" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">{{title}}生成器</view>
+</cu-custom>
+<view class="container">
+    <canvas type="2d" id="faceCanvas" style="width: 100%; height: 800rpx;"></canvas>
+    <view class="button">
+<!--        <button bindtap="generateFace">随机生成</button>-->
+<!--        <button bindtap="downloadCanvasAsImage">下载</button>-->
+        <button class="cu-btn block bg-blue margin-tb-sm lg" bindtap="generateFace">
+            <text class="cuIcon-refresh"></text> 随机生成</button>
+        <button class="cu-btn block bg-black margin-tb-sm lg" bindtap="downloadCanvasAsImage"><text class="cuIcon-pulldown"></text> 下载</button>
+    </view>
+</view>

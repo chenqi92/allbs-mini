@@ -1,4 +1,0 @@
-/* pages/basics/filepreview/filepreview.wxss */
-.inline {
-    display: inline;
-  }

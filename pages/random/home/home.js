@@ -1,7 +1,8 @@
-const app = getApp()
+const app = getApp();
+const API = app.globalData.API_ENDPOINTS.HOT;
+
 Component({
     options: {
-        // 组件的属性列表
         addGlobalClass: true,
     },
     data: {
@@ -10,37 +11,31 @@ Component({
         MainCur: 0,
         VerticalNavTop: 0,
         list: [],
-        load: true
+        load: true,
+        hotNewsList: [],
+        hasMore: true,
     },
-    attached: function () {
-        let that = this;
-        // 生命周期函数--在组件实例进入页面节点树时执行
+    attached() {
         wx.showLoading({
             title: '加载中...',
             mask: true
         });
-        let list = [{}];
-        for (let i = 0; i < 26; i++) {
-            list[i] = {};
-            list[i].name = String.fromCharCode(65 + i);
-            list[i].id = i;
-        }
-        that.setData({
-            list: list,
-            listCur: list[0]
-        });
+        this.sideBarList();
     },
-    ready: function () {
-        // 生命周期函数--在组件布局完成后执行
+    ready() {
         wx.hideLoading();
     },
     methods: {
         tabSelect(e) {
+            const id = e.currentTarget.dataset.id;
             this.setData({
-                TabCur: e.currentTarget.dataset.id,
-                MainCur: e.currentTarget.dataset.id,
-                VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
+                TabCur: id,
+                MainCur: id,
+                VerticalNavTop: (id - 1) * 50,
+                hotNewsList: [],
+                hasMore: true,
             });
+            this.queryHotNews(this.data.list[id].name, true);
         },
         VerticalMain(e) {
             let that = this;
@@ -52,9 +47,9 @@ Component({
                     view.fields({
                         size: true
                     }, data => {
-                        list[i].top = tabHeight;
-                        tabHeight = tabHeight + data.height;
-                        list[i].bottom = tabHeight;
+                        // list[i].top = tabHeight;
+                        // tabHeight = tabHeight + data.height;
+                        // list[i].bottom = tabHeight;
                     }).exec();
                 }
                 that.setData({
@@ -69,10 +64,52 @@ Component({
                         VerticalNavTop: (list[i].id - 1) * 50,
                         TabCur: list[i].id
                     });
+                    if (i !== that.data.MainCur) {
+                        that.setData({ MainCur: i });
+                        that.queryHotNews(list[i].path, false);
+                    }
                     return false;
                 }
             }
+        },
+        sideBarList() {
+            const _this = this;
+            app.$http.get(API.SIDE_BAR_LIST).then(res => {
+                if (res.ok) {
+                    _this.setData({
+                        list: res.data,
+                        TabCur: 0,
+                        MainCur: 0,
+                    });
+                    _this.queryHotNews(res.data[0].name, true);
+                    wx.hideLoading();
+                }
+            }).catch(err => {
+                console.log(err);
+                wx.hideLoading();
+            });
+        },
+        queryHotNews(name, reset = false) {
+            const _this = this;
+            if (this.data.hasMore) {
+                app.$http.get(`${API.GET_HOT_NEWS}/${name}`).then(res => {
+                    if (res.ok) {
+                        const newList = res.data;
+                        _this.setData({
+                            hotNewsList: newList,
+                            hasMore: false
+                        });
+                    }
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+        },
+        formatTime(timestamp) {
+            const date = new Date(timestamp);
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
         }
     }
 });
-
