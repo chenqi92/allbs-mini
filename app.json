@@ -5,10 +5,11 @@
     "pages/toolbox/home/home",
     "pages/profile/home/home",
     "pages/profile/log/log",
-    "pages/basics/filepreview/filepreview",
+    "pages/basics/filePreview/filePreview",
     "pages/webview/webview",
-    "pages/game/home/home",
-    "pages/toolbox/wordGuessing/wordGuessing"
+    "pages/game/pullTheRope/pullTheRope",
+    "pages/toolbox/wordGuessing/wordGuessing",
+    "pages/toolbox/uglyAvatar/uglyAvatar"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

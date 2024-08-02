@@ -1,0 +1,9 @@
+<cu-custom bgColor="{{bgColor}}" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">{{title}}生成器</view>
+</cu-custom>
+<view class="container">
+    <canvas canvas-id="faceCanvas" style="width: 500px; height: 500px;"></canvas>
+    <button bindtap="generateFace">ANOTHER</button>
+    <button bindtap="downloadCanvasAsImage">DOWNLOAD</button>
+</view>

@@ -6,7 +6,7 @@ Component({
   data: {
     elements: [{
       title: '文件预览',
-      name: 'filepreview',
+      name: 'filePreview',
       color: 'cyan',
       icon: 'read'
     }
