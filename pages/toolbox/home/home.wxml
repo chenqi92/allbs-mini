@@ -1,7 +1,7 @@
 <scroll-view scroll-y class="scrollPage">
     <image src='/images/ToolBoxBg.png' mode='widthFix' class='response'></image>
     <view class='nav-list'>
-        <navigator hover-class='none' wx:if="{{item.show}}" url="/pages/{{item.model}}/{{item.name}}/{{item.name}}?title={{item.title}}&color={{item.color}}" class="nav-li bg-{{item.color}}" wx:for="{{elements}}" wx:key>
+        <navigator hover-class='none' wx:if="{{item.show}}" url="/pages/{{item.model}}/{{item.name}}/{{item.name}}?title={{item.title}}&color={{item.color}}" class="nav-li bg-{{item.color}}" wx:for="{{elements}}" wx:key="name">
             <view class="nav-title">{{item.title}}</view>
             <view class="nav-name">{{item.name}}</view>
             <text class='cuIcon-{{item.icon}}'></text>
