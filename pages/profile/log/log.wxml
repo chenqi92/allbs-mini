@@ -150,6 +150,24 @@
     <view class="cu-item text-green">
         <view class="bg-green content shadow">
             <view class="cu-capsule radius">
+                <view class="cu-tag bg-white text-green">v1.1.0</view>
+                <view class="cu-tag line-white">2024-08-04</view>
+            </view>
+            <view class="margin-top-sm text-content">添加一键抠图</view>
+        </view>
+    </view>
+    <view class="cu-item text-green">
+        <view class="bg-green content shadow">
+            <view class="cu-capsule radius">
+                <view class="cu-tag bg-white text-green">v1.0.1</view>
+                <view class="cu-tag line-white">2024-08-02</view>
+            </view>
+            <view class="margin-top-sm text-content">添加丑丑头像生成器</view>
+        </view>
+    </view>
+    <view class="cu-item text-green">
+        <view class="bg-green content shadow">
+            <view class="cu-capsule radius">
                 <view class="cu-tag bg-white text-green">v1.0.0</view>
                 <view class="cu-tag line-white">2024-07-25</view>
             </view>
