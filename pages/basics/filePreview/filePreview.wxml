@@ -12,7 +12,7 @@
     <view class='margin-top-sm'>点击下方得文件预览按钮即可选择微信群聊得文件，<view class="text-red inline">提示成功后打开手机浏览器，将得到得链接粘贴至浏览器中即可预览。</view>为什么我不直接小程序中预览呢？因为小程序得政策是个人认证很多功能是没法使用得，如果想实现这个功能我就得去注册一个企业😂而且认证费涨十倍，发一年广告认证费都不一定能赚回来。。</view>
 </view>
 </view>
-<button class="cu-btn block bg-green margin-tb-sm lg" bindtap="handleFilePreview">
+<button style="width:80%" class="cu-btn block bg-green margin-tb-sm lg" bindtap="handleFilePreview">
     <text class="cuIcon-upload"></text> 文件预览
 </button>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">

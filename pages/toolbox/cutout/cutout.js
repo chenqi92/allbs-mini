@@ -1,5 +1,4 @@
 // pages/index/index.js
-
 const app = getApp(); // 确保能够访问全局变量
 const API = app.globalData.API_ENDPOINTS.MINIO;
 
@@ -10,11 +9,12 @@ Page({
         loading: false,
         bgColor: '',
         title: '',
+        buttonDisabled: false,
     },
 
     onLoad(options) {
         // 页面已经准备好，可以执行一些额外的初始化操作
-        const {title, color} = options;
+        const { title, color } = options;
         // 动态设置 bgColor 和 title
         this.setData({
             bgColor: `bg-gradual-${color}`,
@@ -45,6 +45,7 @@ Page({
                         }
                         that.setData({
                             imageSrc: filePath,
+                            buttonDisabled: false, // 重新上传图片后，启用按钮
                         });
                     }
                 });
@@ -62,7 +63,7 @@ Page({
             return;
         }
 
-        this.setData({loading: true});
+        this.setData({ loading: true, buttonDisabled: true });
 
         wx.uploadFile({
             url: app.globalData.API_BASE_URL + API.REMOVE_BG,
@@ -84,7 +85,7 @@ Page({
                         title: '图片处理失败',
                         icon: 'none'
                     });
-                    that.setData({loading: false});
+                    that.setData({ loading: false, buttonDisabled: false });
                 }
             },
             fail() {
@@ -92,7 +93,7 @@ Page({
                     title: '请求失败',
                     icon: 'none'
                 });
-                that.setData({loading: false});
+                that.setData({ loading: false, buttonDisabled: false });
             }
         });
     },
@@ -108,7 +109,7 @@ Page({
         }
 
         const fileName = app.utils.extractFileNameFromUrl(this.data.resultImageSrc);
-        console.log(fileName)
+
         wx.downloadFile({
             url: this.data.resultImageSrc,
             success(res) {
