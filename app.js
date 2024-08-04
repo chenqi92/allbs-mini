@@ -26,8 +26,7 @@ App({
     this.globalData.API_BASE_URL = API_BASE_URL;
     this.globalData.API_ENDPOINTS = API_ENDPOINTS;
     this.globalData.PREVIEW_BASE_URL = PREVIEW_BASE_URL;
-    // 将 utils 挂载到全局对象上
-    this.globalData.utils = utils;
+
   },
   globalData: {
     ColorList: [{
@@ -107,5 +106,6 @@ App({
       },
     ]
   },
-  $http
+  $http,
+  utils
 })

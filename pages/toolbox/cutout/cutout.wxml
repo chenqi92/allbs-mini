@@ -13,6 +13,7 @@
         <image src="{{resultImageSrc}}" mode="aspectFit" class="image"></image>
     </view>
 </view>
+<button class="cu-btn block bg-blue margin-tb-sm lg" wx:if="{{resultImageSrc}}" bindtap="downloadImage">下载图片</button>
 <view class='cu-load load-modal' wx:if="{{loading}}">
     <!-- <view class='cuIcon-emojifill text-orange'></view> -->
     <image src='https://nas.allbs.cn:9006/cloudpic/cloudpic/2024/07/88af384e698c5b47819c8be2bb3f33b8.png' class='png' mode='aspectFit'></image>

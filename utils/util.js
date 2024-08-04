@@ -33,6 +33,11 @@ const formatNumber = n => {
     return n[1] ? n : `0${n}`
 }
 
+const extractFileNameFromUrl = url => {
+    const urlParts = url.split('?')[0]
+    return urlParts.substring(urlParts.lastIndexOf('/') + 1)
+}
+
 module.exports = {
-    formatTime, formatTimestamp, formatNumber
+    formatTime, formatTimestamp, formatNumber, extractFileNameFromUrl
 }
