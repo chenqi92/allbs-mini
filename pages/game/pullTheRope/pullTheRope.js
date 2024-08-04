@@ -1,3 +1,5 @@
+const app = getApp(); // 确保能够访问全局变量
+
 Page({
   data: {
     bgColor: '',
@@ -11,41 +13,46 @@ Page({
   },
 
   onLoad: function (options) {
-    // 页面已经准备好，可以执行一些额外的初始化操作
     const { title, color } = options;
-    // 动态设置 bgColor 和 itemName
     this.setData({
       bgColor: `bg-gradual-${color}`,
       title: title
     });
 
-    this.canvas = wx.createCanvasContext('canvas');
-    const canvas = wx.createSelectorQuery().select('#canvas');
-    canvas.boundingClientRect(rect => {
-      this.initCanvas(rect);
+    wx.createSelectorQuery().select('#canvas').boundingClientRect(rect => {
+      if (rect) {
+        this.initCanvas(rect);
+      } else {
+        console.error('Failed to retrieve canvas bounding rect');
+      }
     }).exec();
   },
 
   initCanvas: function (rect) {
     const canvasWidth = rect.width;
     const canvasHeight = rect.height;
-    const ctx = this.canvas;
 
-    // 设置画布尺寸
-    ctx.canvas.width = canvasWidth;
-    ctx.canvas.height = canvasHeight;
+    wx.createSelectorQuery()
+        .select('#canvas')
+        .fields({ node: true, size: true })
+        .exec((res) => {
+          const canvas = res[0].node;
+          const ctx = canvas.getContext('2d');
 
-    // 初始化物理模拟
-    this.initSimulation(ctx, canvasWidth, canvasHeight);
+          canvas.width = canvasWidth;
+          canvas.height = canvasHeight;
+
+          this.initSimulation(ctx, canvasWidth, canvasHeight, canvas);
+        });
   },
 
-  initSimulation: function (ctx, canvasWidth, canvasHeight) {
+  initSimulation: function (ctx, canvasWidth, canvasHeight, canvas) {
     class Point {
       constructor(x, y) {
         this.x = x;
         this.y = y;
         this.oldX = x;
-        this.oldY = x;
+        this.oldY = y;
         this.vx = 0;
         this.vy = 0;
         this.pinned = false;
@@ -129,7 +136,7 @@ Page({
     let tearStrength = 47.5;
     let clothSize = 30;
 
-    function createCloth() {
+    const createCloth = () => {
       points = [];
       sticks = [];
 
@@ -158,7 +165,7 @@ Page({
       }
     }
 
-    function getTensionColor(tension) {
+    const getTensionColor = (tension) => {
       tension = Math.min(tension, 1);
       const r = Math.floor(255 * tension);
       const g = Math.floor(255 * (1 - tension));
@@ -166,7 +173,7 @@ Page({
       return `rgb(${r}, ${g}, ${b})`;
     }
 
-    function update(dt) {
+    const update = (dt) => {
       points.forEach(p => {
         p.update(dt);
         p.tension = 0;
@@ -211,20 +218,37 @@ Page({
         ctx.fill();
       }
 
-      ctx.draw();
-      requestAnimationFrame(() => update(1 / 60));
+      canvas.requestAnimationFrame(() => update(1 / 60));
     }
 
-    function init() {
+    const init = () => {
       createCloth();
       update(1 / 60);
     }
+
+    const getClosestPoint = (x, y) => {
+      let closestPoint = null;
+      let minDistance = Infinity;
+
+      points.forEach(p => {
+        const distance = Math.hypot(p.x - x, p.y - y);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestPoint = p;
+        }
+      });
+
+      return minDistance < 20 ? closestPoint : null;
+    }
+
+    this.getClosestPoint = getClosestPoint;
+    this.draggedPoint = null;
 
     canvas.addEventListener('touchstart', (e) => {
       const touch = e.touches[0];
       mouseX = touch.clientX;
       mouseY = touch.clientY;
-      draggedPoint = getClosestPoint(mouseX, mouseY);
+      this.draggedPoint = getClosestPoint(mouseX, mouseY);
     });
 
     canvas.addEventListener('touchmove', (e) => {
@@ -234,24 +258,9 @@ Page({
     });
 
     canvas.addEventListener('touchend', () => {
-      draggedPoint = null;
+      this.draggedPoint = null;
     });
 
     init();
-  },
-
-  getClosestPoint: function (x, y) {
-    let closestPoint = null;
-    let minDistance = Infinity;
-
-    points.forEach(p => {
-      const distance = Math.hypot(p.x - x, p.y - y);
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestPoint = p;
-      }
-    });
-
-    return minDistance < 20 ? closestPoint : null;
   }
 });
