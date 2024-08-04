@@ -9,7 +9,8 @@
     "pages/webview/webview",
     "pages/game/pullTheRope/pullTheRope",
     "pages/toolbox/wordGuessing/wordGuessing",
-    "pages/toolbox/uglyAvatar/uglyAvatar"
+    "pages/toolbox/uglyAvatar/uglyAvatar",
+    "pages/toolbox/cutout/cutout"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

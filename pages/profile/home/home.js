@@ -8,6 +8,7 @@ Component({
     fc: 0,
     sc: 0,
     tc: 0,
+    version: '1.0.0'
   },
   attached() {
     let that = this;
@@ -28,7 +29,8 @@ Component({
           _this.setData({
             fc: _this.countNum(res.data.fc),
             sc: _this.countNum(res.data.sc),
-            tc: _this.countNum(res.data.tc)
+            tc: _this.countNum(res.data.tc),
+            version: res.data.version,
           })
         }
       }).catch(err => {

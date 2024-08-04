@@ -1,5 +1,6 @@
 // api.js
-const API_BASE_URL = "https://wx.allbs.cn/";
+// const API_BASE_URL = "https://wx.allbs.cn/";
+const API_BASE_URL = "http://192.168.0.120:8888/";
 const PREVIEW_BASE_URL = "https://preview.allbs.cn/onlinePreview?url=";
 
 const API_URLS = {
@@ -10,6 +11,7 @@ const API_URLS = {
     MINIO: {
         BASE: 'minio',
         UPLOAD: 'upload',
+        REMOVE_BG: 'remove-bg'
     },
     HOT: {
         BASE: 'wx/hot',

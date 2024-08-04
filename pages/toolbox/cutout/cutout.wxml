@@ -1,0 +1,19 @@
+<!-- pages/index/index.wxml -->
+<cu-custom bgColor="{{bgColor}}" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">{{title}}</view>
+</cu-custom>
+<view class="container">
+    <view class="placeholder" bindtap="chooseImage">
+        <view wx:if="{{!imageSrc}}" class="placeholder-text">点击选择图片</view>
+        <image wx:if="{{imageSrc}}" src="{{imageSrc}}" mode="aspectFit" class="image"></image>
+    </view>
+    <button class="button" bindtap="removeBg">一键抠图</button>
+    <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+        <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+        <view class='load-progress-spinner text-green'></view>
+    </view>
+    <view class="result" wx:if="{{resultImageSrc}}">
+        <image src="{{resultImageSrc}}" mode="aspectFit" class="image"></image>
+    </view>
+</view>

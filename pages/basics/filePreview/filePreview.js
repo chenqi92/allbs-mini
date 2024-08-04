@@ -85,7 +85,7 @@ Page({
 
                 const tempFilePath = res.tempFiles[0].path;
                 const tempFiles = res.tempFiles;
-                const maxSize = 10 * 1024 * 1024; // 5MB
+                const maxSize = 10 * 1024 * 1024; // 10MB
 
                 if (tempFiles[0].size > maxSize) {
                     wx.showToast({
@@ -101,7 +101,7 @@ Page({
                 })
                 // 上传文件
                 wx.uploadFile({
-                    url: app.globalData.API_BASE_URL + app.globalData.API_ENDPOINTS.MINIO.UPLOAD, // 替换为实际的上传文件接口地址
+                    url: app.globalData.API_BASE_URL + app.globalData.API_ENDPOINTS.MINIO.UPLOAD,
                     filePath: tempFilePath,
                     name: 'file',
                     success(uploadRes) {
