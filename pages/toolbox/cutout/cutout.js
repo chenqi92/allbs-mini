@@ -1,12 +1,12 @@
 // pages/index/index.js
 const app = getApp(); // 确保能够访问全局变量
+const API = app.globalData.API_ENDPOINTS.MINIO.REMOVE_BG;
 
 Page({
     data: {
         imageSrc: '',
         resultImageSrc: '',
         loading: false,
-        loadProgress: 0,
         bgColor: '',
         title: '',
     },
@@ -61,26 +61,28 @@ Page({
             return;
         }
 
-        this.setData({loading: true, loadProgress: 0});
+        this.setData({loading: true});
 
         wx.uploadFile({
-            url: app.globalData.API_BASE_URL + app.globalData.API_ENDPOINTS.MINIO.REMOVE_BG,
+            url: app.globalData.API_BASE_URL + API,
             filePath: this.data.imageSrc,
             name: 'file',
+            header: {
+                'Content-Type': 'application/json'
+            },
             success(res) {
                 const data = JSON.parse(res.data);
                 if (data.code === 200) {
                     that.setData({
                         resultImageSrc: data.data,
                         loading: false,
-                        loadProgress: 100
                     });
                 } else {
                     wx.showToast({
                         title: '图片处理失败',
                         icon: 'none'
                     });
-                    that.setData({loading: false, loadProgress: 0});
+                    that.setData({loading: false});
                 }
             },
             fail() {
@@ -88,7 +90,7 @@ Page({
                     title: '请求失败',
                     icon: 'none'
                 });
-                that.setData({loading: false, loadProgress: 0});
+                that.setData({loading: false});
             }
         });
     }
