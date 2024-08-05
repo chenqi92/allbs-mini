@@ -1,4 +1,3 @@
-// pages/index/index.js
 const app = getApp(); // 确保能够访问全局变量
 const API = app.globalData.API_ENDPOINTS.MINIO;
 
@@ -10,6 +9,8 @@ Page({
         bgColor: '',
         title: '',
         buttonDisabled: false,
+        modalName: '',
+        imageSelectionDisabled: false
     },
 
     onLoad(options) {
@@ -22,19 +23,32 @@ Page({
         });
     },
 
-    chooseImage: function () {
+    showModal(e) {
+        if (this.data.loading) {
+            return;
+        }
+        this.setData({
+            modalName: e.currentTarget.dataset.target
+        });
+    },
+
+    hideModal(e) {
+        this.setData({
+            modalName: ''
+        });
+    },
+
+    chooseImageFromChat() {
         const that = this;
-        wx.chooseImage({
+        wx.chooseMessageFile({
             count: 1,
-            sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
+            type: 'image',
             success(res) {
-                const tempFilePaths = res.tempFilePaths;
-                const filePath = tempFilePaths[0];
+                const tempFilePaths = res.tempFiles;
+                const filePath = tempFilePaths[0].path;
                 wx.getFileSystemManager().getFileInfo({
                     filePath,
                     success(info) {
-                        // 这里只能获取文件大小，不能获取文件类型
                         const maxSize = 10 * 1024 * 1024; // 10MB
                         if (info.size > maxSize) {
                             wx.showToast({
@@ -49,11 +63,43 @@ Page({
                         });
                     }
                 });
+                that.hideModal();
             }
         });
     },
 
-    removeBg: function () {
+    chooseImageFromAlbum() {
+        const that = this;
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success(res) {
+                const tempFilePaths = res.tempFilePaths;
+                const filePath = tempFilePaths[0];
+                wx.getFileSystemManager().getFileInfo({
+                    filePath,
+                    success(info) {
+                        const maxSize = 10 * 1024 * 1024; // 10MB
+                        if (info.size > maxSize) {
+                            wx.showToast({
+                                title: '文件大小超过10MB',
+                                icon: 'none'
+                            });
+                            return;
+                        }
+                        that.setData({
+                            imageSrc: filePath,
+                            buttonDisabled: false, // 重新上传图片后，启用按钮
+                        });
+                    }
+                });
+                that.hideModal();
+            }
+        });
+    },
+
+    removeBg() {
         const that = this;
         if (!this.data.imageSrc) {
             wx.showToast({
@@ -63,7 +109,11 @@ Page({
             return;
         }
 
-        this.setData({ loading: true, buttonDisabled: true });
+        this.setData({
+            loading: true,
+            buttonDisabled: true,
+            imageSelectionDisabled: true
+        });
 
         wx.uploadFile({
             url: app.globalData.API_BASE_URL + API.REMOVE_BG,
@@ -79,13 +129,18 @@ Page({
                     that.setData({
                         resultImageSrc: url,
                         loading: false,
+                        imageSelectionDisabled: false
                     });
                 } else {
                     wx.showToast({
                         title: '图片处理失败',
                         icon: 'none'
                     });
-                    that.setData({ loading: false, buttonDisabled: false });
+                    that.setData({
+                        loading: false,
+                        buttonDisabled: false,
+                        imageSelectionDisabled: false
+                    });
                 }
             },
             fail() {
@@ -93,12 +148,16 @@ Page({
                     title: '请求失败',
                     icon: 'none'
                 });
-                that.setData({ loading: false, buttonDisabled: false });
+                that.setData({
+                    loading: false,
+                    buttonDisabled: false,
+                    imageSelectionDisabled: false
+                });
             }
         });
     },
 
-    downloadImage: function () {
+    downloadImage() {
         const that = this;
         if (!this.data.resultImageSrc) {
             wx.showToast({
@@ -159,4 +218,4 @@ Page({
             }
         });
     }
-})
+});

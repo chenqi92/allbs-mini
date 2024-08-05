@@ -1,10 +1,9 @@
-<!-- pages/index/index.wxml -->
 <cu-custom bgColor="{{bgColor}}" isBack="{{true}}">
     <view slot="backText">返回</view>
     <view slot="content">{{title}}</view>
 </cu-custom>
 <view class="container">
-    <view class="placeholder" bindtap="chooseImage">
+    <view class="placeholder" bindtap="showModal" data-target="RadioModal">
         <view wx:if="{{!imageSrc}}" class="placeholder-text">点击选择图片</view>
         <image wx:if="{{imageSrc}}" src="{{imageSrc}}" mode="aspectFit" class="image"></image>
     </view>
@@ -19,5 +18,27 @@
     <view class='cu-load load-modal' wx:if="{{loading}}">
         <image src='https://nas.allbs.cn:9006/cloudpic/cloudpic/2024/07/88af384e698c5b47819c8be2bb3f33b8.png' class='png' mode='aspectFit'></image>
         <view class='gray-text'>自动抠图中...</view>
+    </view>
+</view>
+
+<!-- 模态框 -->
+<view class="cu-modal {{modalName=='RadioModal'?'show':''}}" bindtap="hideModal">
+    <view class="cu-dialog" catchtap>
+        <radio-group class="block">
+            <view class="cu-list menu text-left">
+                <view class="cu-item" bindtap="chooseImageFromChat">
+                    <label class="flex justify-between align-center flex-sub">
+                        <view class="flex-sub">从群聊中选择图片</view>
+                        <radio class="round" value="chat"></radio>
+                    </label>
+                </view>
+                <view class="cu-item" bindtap="chooseImageFromAlbum">
+                    <label class="flex justify-between align-center flex-sub">
+                        <view class="flex-sub">从相册选择图片</view>
+                        <radio class="round" value="album"></radio>
+                    </label>
+                </view>
+            </view>
+        </radio-group>
     </view>
 </view>
