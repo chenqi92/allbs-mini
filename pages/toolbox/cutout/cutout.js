@@ -10,7 +10,6 @@ Page({
         title: '',
         buttonDisabled: false,
         modalName: '',
-        imageSelectionDisabled: false
     },
 
     onLoad(options) {
@@ -24,7 +23,7 @@ Page({
     },
 
     showModal(e) {
-        if (this.data.loading) {
+        if(this.data.loading) {
             return;
         }
         this.setData({
@@ -112,7 +111,6 @@ Page({
         this.setData({
             loading: true,
             buttonDisabled: true,
-            imageSelectionDisabled: true
         });
 
         wx.uploadFile({
@@ -129,7 +127,6 @@ Page({
                     that.setData({
                         resultImageSrc: url,
                         loading: false,
-                        imageSelectionDisabled: false
                     });
                 } else {
                     wx.showToast({
@@ -139,7 +136,6 @@ Page({
                     that.setData({
                         loading: false,
                         buttonDisabled: false,
-                        imageSelectionDisabled: false
                     });
                 }
             },
@@ -151,7 +147,6 @@ Page({
                 that.setData({
                     loading: false,
                     buttonDisabled: false,
-                    imageSelectionDisabled: false
                 });
             }
         });
@@ -171,34 +166,21 @@ Page({
 
         wx.downloadFile({
             url: this.data.resultImageSrc,
+            filePath: `${wx.env.USER_DATA_PATH}/${fileName}`,
             success(res) {
                 if (res.statusCode === 200) {
-                    const tempFilePath = res.tempFilePath;
-                    const newFilePath = `${wx.env.USER_DATA_PATH}/${fileName}`;
-
-                    wx.getFileSystemManager().rename({
-                        oldPath: tempFilePath,
-                        newPath: newFilePath,
+                    const tempFilePath = res.filePath;
+                    wx.saveImageToPhotosAlbum({
+                        filePath: tempFilePath,
                         success() {
-                            wx.saveImageToPhotosAlbum({
-                                filePath: newFilePath,
-                                success() {
-                                    wx.showToast({
-                                        title: '图片下载成功',
-                                        icon: 'success'
-                                    });
-                                },
-                                fail() {
-                                    wx.showToast({
-                                        title: '保存图片失败',
-                                        icon: 'none'
-                                    });
-                                }
+                            wx.showToast({
+                                title: '图片下载成功',
+                                icon: 'success'
                             });
                         },
                         fail() {
                             wx.showToast({
-                                title: '重命名文件失败',
+                                title: '保存图片失败',
                                 icon: 'none'
                             });
                         }

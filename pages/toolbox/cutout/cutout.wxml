@@ -23,7 +23,7 @@
 
 <!-- 模态框 -->
 <view class="cu-modal {{modalName=='RadioModal'?'show':''}}" bindtap="hideModal">
-    <view class="cu-dialog" catchtap>
+    <view class="cu-dialog" catchtap="true">
         <radio-group class="block">
             <view class="cu-list menu text-left">
                 <view class="cu-item" bindtap="chooseImageFromChat">
