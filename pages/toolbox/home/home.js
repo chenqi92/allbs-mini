@@ -27,7 +27,7 @@ Component({
                 color: 'pink',
                 icon: 'magic',
                 model: 'game',
-                show: true,
+                show: false,
             },
             {title: '丑丑头像', name: 'uglyAvatar', color: 'olive', icon: 'album', model: 'toolbox', show: true,},
             {title: '一键抠图', name: 'cutout', color: 'mauve', icon: 'picfill', model: 'toolbox', show: true,},

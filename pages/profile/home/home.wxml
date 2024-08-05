@@ -13,7 +13,7 @@
         <view class="flex flex-sub flex-direction solid-right">
             <view class="text-xxl text-orange">{{fc}}</view>
             <view class="margin-top-sm">
-                <text class="cuIcon-read"></text> 打开次数</view>
+                <text class="cuIcon-read"></text> 解析次数</view>
         </view>
         <view class="flex flex-sub flex-direction solid-right">
             <view class="text-xxl text-blue">{{sc}}</view>
