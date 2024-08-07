@@ -5,11 +5,11 @@
   <view class='text-center margin-bottom text-lg  text-grey'>关于文件预览得说明</view>
   <view class='text-content'>
     <view class='margin-top-sm'>1.首要注意事项说明:</view>
-    <view class='margin-top-sm'>这个功能得实现原理是通过上传文件至本人服务器进行解析。<view class="text-red inline">所以不要用来看隐私文件！不要用来看隐私文件！</view></view>
+    <view class='margin-top-sm'>这个功能得实现原理是通过上传文件至本人服务器进行解析。<view class="text-red inline">所以不要用来看隐私文件！不要用来看隐私文件！</view>虽然会定时删除，但是有服务器被入侵的风险！</view>
     <view class='margin-top-sm'>2.文件大小限制说明:</view>
-    <view class='margin-top-sm'>上面说了需要传输到云服务器进行解析，但是因为云服务器实在太贵，只买得起便宜货，所以带宽不大，不要用来看太大得文件！上传最大限制了10M</view>
+    <view class='margin-top-sm'>文件目前最大支持10M</view>
     <view class='margin-top-sm'>3.使用方法说明:</view>
-    <view class='margin-top-sm'>点击下方得文件预览按钮即可选择微信群聊得文件，<view class="text-red inline">提示成功后打开手机浏览器，将得到得链接粘贴至浏览器中即可预览。</view>为什么我不直接小程序中预览呢？因为小程序得政策是个人认证很多功能是没法使用得，如果想实现这个功能我就得去注册一个企业😂而且认证费涨十倍，发一年广告认证费都不一定能赚回来。。</view>
+    <view class='margin-top-sm'>可将word、excel等文件上传，解析完成后将粘贴板链接传输到电脑上，能够在没有装office软件的电脑上通过浏览器查看word、excel等</view>
 </view>
 </view>
 <button style="width:80%" class="cu-btn block bg-green margin-tb-sm lg" bindtap="handleFilePreview">

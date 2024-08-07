@@ -122,9 +122,9 @@ Page({
                             })
 
                             // 打开新页面加载该链接 没有企业认证，暂时注释掉
-                            // wx.navigateTo({
-                            //   url: '/pages/webview/webview?url=' + encodeURIComponent(previewUrl)
-                            // });
+                            wx.navigateTo({
+                              url: '/pages/webview/webview?url=' + encodeURIComponent(previewUrl)
+                            });
 
                             // 将链接复制到剪贴板
                             wx.setClipboardData({
@@ -133,9 +133,9 @@ Page({
                                     _this.setData({
                                         previewUrl: previewUrl
                                     })
-                                    _this.showModal();
+                                    // _this.showModal();
                                     // wx.showToast({
-                                    //   title: '链接已复制，请打开手机浏览器粘贴后查看文件',
+                                    //   title: '链接已复制，可将链接拷贝至浏览器中查看',
                                     //   duration: 3000
                                     // });
                                 }
