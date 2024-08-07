@@ -10,7 +10,8 @@
     "pages/game/pullTheRope/pullTheRope",
     "pages/toolbox/wordGuessing/wordGuessing",
     "pages/toolbox/uglyAvatar/uglyAvatar",
-    "pages/toolbox/cutout/cutout"
+    "pages/toolbox/cutout/cutout",
+    "pages/random/home/home"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

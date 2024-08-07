@@ -1,26 +1,26 @@
-<basics wx:if="{{PageCur=='basics'}}"></basics>
 <toolbox wx:if="{{PageCur=='toolbox'}}"></toolbox>
-<!--<random wx:if="{{PageCur=='random'}}"></random>-->
+<random wx:if="{{PageCur=='random'}}"></random>
+<basics wx:if="{{PageCur=='basics'}}"></basics>
 <profile wx:if="{{PageCur=='profile'}}"></profile>
 <view class="cu-bar tabbar bg-white shadow foot">
-  <view class="action" bindtap="NavChange" data-cur="basics">
-    <view class='cuIcon-cu-image'>
-      <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
-    </view>
-    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">首页</view>
-  </view>
   <view class="action" bindtap="NavChange" data-cur="toolbox">
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/toolbox{{PageCur=='toolbox'?'_cur':''}}.png"></image>
     </view>
     <view class="{{PageCur=='toolbox'?'text-green':'text-gray'}}">工具箱</view>
   </view>
-<!--  <view class="action" bindtap="NavChange" data-cur="random">-->
-<!--    <view class='cuIcon-cu-image'>-->
-<!--      <image src="/images/tabbar/random{{PageCur=='random'?'_cur':''}}.png"></image>-->
-<!--    </view>-->
-<!--    <view class="{{PageCur=='random'?'text-green':'text-gray'}}">热点</view>-->
-<!--  </view>-->
+  <view class="action" bindtap="NavChange" data-cur="random">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/random{{PageCur=='random'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='random'?'text-green':'text-gray'}}">热点讯息</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="basics">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">常用工具</view>
+  </view>
   <view class="action" bindtap="NavChange" data-cur="profile">
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/profile{{PageCur=='profile'?'_cur':''}}.png"></image>
