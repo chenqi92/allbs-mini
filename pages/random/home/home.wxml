@@ -1,6 +1,6 @@
 <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-    <swiper-item wx:for="{{4}}" wx:key>
-        <image src="https://nas.allbs.cn:9006/cloudpic/2024/07/9ae49ec2c315fbef843f218453c66011.jpg" mode='aspectFill'></image>
+    <swiper-item wx:for="{{bannerList}}" wx:key>
+        <image src="{{item}}" mode='aspectFill'></image>
     </swiper-item>
 </swiper>
 <view class="VerticalBox">

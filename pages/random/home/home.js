@@ -14,6 +14,7 @@ Component({
         load: true,
         hotNewsList: [],
         hasMore: true,
+        bannerList: [],
     },
     attached() {
         wx.showLoading({
@@ -21,6 +22,7 @@ Component({
             mask: true
         });
         this.sideBarList();
+        this.getBannerList();
     },
     ready() {
         wx.hideLoading();
@@ -65,7 +67,7 @@ Component({
                         TabCur: list[i].id
                     });
                     if (i !== that.data.MainCur) {
-                        that.setData({ MainCur: i });
+                        that.setData({MainCur: i});
                         that.queryHotNews(list[i].path, false);
                     }
                     return false;
@@ -87,6 +89,18 @@ Component({
             }).catch(err => {
                 console.log(err);
                 wx.hideLoading();
+            });
+        },
+        getBannerList() {
+            const _this = this;
+            app.$http.get(API.BANNER_LIST).then(res => {
+                if (res.ok) {
+                    _this.setData({
+                        bannerList: res.data
+                    });
+                }
+            }).catch(err => {
+                console.log(err);
             });
         },
         queryHotNews(name, reset = false) {
