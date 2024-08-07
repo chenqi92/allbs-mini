@@ -29,14 +29,18 @@
   bottom: 0;
   margin: auto;
 }
-.VerticalBox{
+.VerticalBox {
   display: flex;
 }
-.VerticalMain{
-  background-color: #f1f1f1;
+
+.VerticalNav.nav {
+  width: 200rpx; /* 保持左侧导航栏宽度 */
+  white-space: initial;
 }
-.padding-lrr {
-  padding-right: 200rpx;
+
+.VerticalMain {
+  background-color: #f1f1f1;
+  flex-grow: 1; /* 使右侧内容自适应宽度 */
 }
 .cu-card.article>.cu-item .content>image {
   width: 180rpx;
@@ -46,4 +50,21 @@
 }
 .padding-top {
   padding-top: 20rpx;
+}
+.text-cut-multiline {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 限制显示两行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* 允许文本换行 */
+  line-height: 1.5; /* 设置行高，根据需求调整 */
+}
+.title {
+  margin: 20rpx 0; /* 上下留有20rpx的外边距，根据需求调整 */
+  padding: 0 30rpx; /* 左右内边距 */
+}
+.padding-lr {
+  padding-left: 20rpx;
+  padding-right: 20rpx;
 }

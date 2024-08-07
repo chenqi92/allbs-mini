@@ -1,28 +1,30 @@
-<swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+<swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000"
+        duration="500">
     <swiper-item wx:for="{{bannerList}}" wx:key>
         <image src="{{item}}" mode='aspectFill'></image>
     </swiper-item>
 </swiper>
 <view class="VerticalBox">
-    <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 375rpx  - 147rpx)">
-        <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+    <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}"
+                 style="height:calc(100vh - 375rpx  - 147rpx); flex-shrink: 0;">
+        <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect'
+              data-id="{{index}}">
             {{item.chineseName}}
         </view>
     </scroll-view>
-    <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx - 147rpx)" bindscroll="VerticalMain">
+    <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx - 147rpx)"
+                 bindscroll="VerticalMain">
         <view class="padding-top padding-lr padding-lrr" wx:for="{{hotNewsList}}" wx:key="id">
             <view class="cu-card article no-card}}">
                 <view class="cu-item shadow">
                     <view class="title">
-                        <view class="text-cut">{{item.title}}</view>
+                        <view class="text-cut-multiline">{{item.title}}</view>
                     </view>
                     <view class="content">
                         <image wx:if="{{item.cover}}" src="{{item.cover}}" mode="aspectFill"></image>
                         <view class="desc" wx:if="{{item.desc}}">
-                            <view class="text-content"> {{item.desc}}</view>
-                            <view>
-<!--                                <view class="cu-tag bg-red light sm round">热度</view>-->
-<!--                                <view class="cu-tag bg-green light sm round">{{item.hot}}</view>-->
+                            <view class="text-content">
+                                {{item.desc}}
                             </view>
                         </view>
                     </view>
@@ -31,3 +33,4 @@
         </view>
     </scroll-view>
 </view>
+
