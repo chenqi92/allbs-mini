@@ -124,6 +124,17 @@ Component({
             const hours = date.getHours().toString().padStart(2, '0');
             const minutes = date.getMinutes().toString().padStart(2, '0');
             return `${hours}:${minutes}`;
-        }
+        },
+        CopyLink(e) {
+            wx.setClipboardData({
+                data: e.currentTarget.dataset.link,
+                success: res => {
+                    wx.showToast({
+                        title: '链接已复制',
+                        duration: 1000,
+                    })
+                }
+            })
+        },
     }
 });

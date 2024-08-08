@@ -1,4 +1,3 @@
-/* pages/random/home/home.wxss */
 .VerticalNav.nav {
   width: 200rpx;
   white-space: initial;
@@ -17,6 +16,7 @@
 .VerticalNav.nav .cu-item.cur {
   background-color: #f1f1f1;
 }
+
 .VerticalNav.nav .cu-item.cur::after {
   content: "";
   width: 8rpx;
@@ -29,6 +29,7 @@
   bottom: 0;
   margin: auto;
 }
+
 .VerticalBox {
   display: flex;
 }
@@ -42,15 +43,19 @@
   background-color: #f1f1f1;
   flex-grow: 1; /* 使右侧内容自适应宽度 */
 }
+
 .cu-card.article>.cu-item .content>image {
   width: 180rpx;
   height: 4.6em;
   margin-right: 20rpx;
   border-radius: 6rpx;
+  float: left; /* 图片浮动到左边 */
 }
+
 .padding-top {
   padding-top: 20rpx;
 }
+
 .text-cut-multiline {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -60,11 +65,22 @@
   white-space: normal; /* 允许文本换行 */
   line-height: 1.5; /* 设置行高，根据需求调整 */
 }
+
 .title {
   margin: 20rpx 0; /* 上下留有20rpx的外边距，根据需求调整 */
   padding: 0 30rpx; /* 左右内边距 */
 }
+
 .padding-lr {
   padding-left: 20rpx;
   padding-right: 20rpx;
+}
+
+.text-content {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+.content {
+  word-break: break-word;
 }

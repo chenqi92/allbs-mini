@@ -5,15 +5,12 @@
     </swiper-item>
 </swiper>
 <view class="VerticalBox">
-    <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}"
-                 style="height:calc(100vh - 375rpx  - 147rpx); flex-shrink: 0;">
-        <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect'
-              data-id="{{index}}">
+    <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 375rpx - 147rpx)">
+        <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{index}}">
             {{item.chineseName}}
         </view>
     </scroll-view>
-    <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx - 147rpx)"
-                 bindscroll="VerticalMain">
+    <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx - 147rpx)" bindscroll="VerticalMain">
         <view class="padding-top padding-lr padding-lrr" wx:for="{{hotNewsList}}" wx:key="id">
             <view class="cu-card article no-card}}">
                 <view class="cu-item shadow">
