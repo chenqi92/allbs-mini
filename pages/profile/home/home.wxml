@@ -18,12 +18,12 @@
         <view class="flex flex-sub flex-direction solid-right">
             <view class="text-xxl text-blue">{{sc}}</view>
             <view class="margin-top-sm">
-                <text class="cuIcon-group"></text> 累计用户</view>
+                <text class="cuIcon-group"></text> 上月访问</view>
         </view>
         <view class="flex flex-sub flex-direction">
             <view class="text-xxl text-green">{{tc}}</view>
             <view class="margin-top-sm">
-                <text class="cuIcon-emojiflashfill"></text> 正在使用</view>
+                <text class="cuIcon-emojiflashfill"></text> 昨日访问</view>
         </view>
     </view>
     <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
