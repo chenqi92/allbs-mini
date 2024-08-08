@@ -38,6 +38,7 @@ Page({
     },
 
     chooseImageFromChat() {
+        this.hideModal();
         const that = this;
         wx.chooseMessageFile({
             count: 1,
@@ -69,6 +70,7 @@ Page({
 
     chooseImageFromAlbum() {
         const that = this;
+        that.hideModal();
         wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
