@@ -1,0 +1,68 @@
+<cu-custom bgColor="bg-gradual-olive" isBack="{{true}}">
+	<view slot="content">身份证生成</view>
+</cu-custom>
+<view data-tp="1" bindtap="showSelectModal" class="t-sfz-zm t-flex-col" style="background-size: 100% 100%;background-repeat: no-repeat;">
+	<image wx:if="{{zmPic}}" src="{{zmPic}}" class="t-sfz-xzpic"></image>
+	<image wx:if="{{!zmPic}}" class="t-sfz-add" src="/images/certificates/tianjia.png"></image>
+	<view wx:if="{{!zmPic}}" class="t-sfz-add-desc">添加身份证正面照</view>
+	<image catchtap="toDelete" data-tp="1" wx:if="{{zmPic}}" class="t-delete" src="/images/certificates/sfz-delete.png"></image>
+	<view wx:if="{{zmPic}}" class="t-edit-tips">点击图片编辑</view>
+</view>
+<view data-tp="2" bindtap="showSelectModal" class="t-sfz-zm t-flex-col" style="background-size: 100% 100%;background-repeat: no-repeat;">
+	<image wx:if="{{fmPic}}" src="{{fmPic}}" class="t-sfz-xzpic"></image>
+	<image wx:if="{{!fmPic}}" class="t-sfz-add" src="/images/certificates/tianjia.png"></image>
+	<view wx:if="{{!fmPic}}" class="t-sfz-add-desc">添加身份证反面照</view>
+	<image catchtap="toDelete" data-tp="2" wx:if="{{fmPic}}" class="t-delete" src="/images/certificates/sfz-delete.png"></image>
+	<view wx:if="{{fmPic}}" class="t-edit-tips">点击图片编辑</view>
+</view>
+<view class="t-dysz-con t-flex-row-e">
+	<view class="t-flex-row-e">
+		<view bindtap="yulan" class="t-dysz-setting t-flex-row t-mg-l-90">
+			<image class="t-icon" src="{{'/images/certificates/eye-'+(canConfirm?'blue':'grey')+'.png'}}"></image>
+			<text class="{{canConfirm?'t-can-set-st':''}}">预览</text>
+		</view>
+	</view>
+</view>
+<view class="t-bottom">
+	<view class="t-wrap t-flex-row-sb">
+		<view bindtap="toConfirm" class="t-b-right t-flex-row {{canConfirm?'t-can-confirm':''}}">生成图片</view>
+	</view>
+</view>
+
+<!-- 确认弹框 -->
+<t-confirm ext-class="t-dag" bindbuttontap="bindConfirm" title="{{confirmTitle}}" show="{{confirmMsg}}" buttons="{{[{extClass:'t-cancle-btn',text:'取消'},{extClass:'t-confrim-btn',text:'确认'}]}}">{{confirmMsg}}</t-confirm>
+<!-- 底部选择本地还是微信文件弹框 -->
+<bottom-dialog extClass="t-bd-dialog" close="closeSelectModal" maskClosable="{{true}}" closabled="{{false}}" show="{{isShowBottomDialog}}">
+	<view class="t-bd-dialog-con" slot='title'>
+		<view class="t-bd-dialog-wrap t-flex-row-sa">
+			<view class="t-flex-col t-bd-dw-icon" bindtap="selectFile" data-opr="1">
+				<image class="t-bdw-wx" src="/images/pic/icon_weixin.svg"></image>
+				<text class="t-bd-dw-icon-desc">微信照片</text>
+			</view>
+			<view class="t-flex-col t-bd-dw-icon" bindtap="selectFile" data-opr="2">
+				<image class="t-bdw-wx" src="/images/pic/icon_paizhao.svg"></image>
+				<text class="t-bd-dw-icon-desc">拍照</text>
+			</view>
+			<view class="t-flex-col t-bd-dw-icon" bindtap="selectFile" data-opr="3">
+				<image class="t-bdw-wx" src="/images/pic/icon_bendi.svg"></image>
+				<text class="t-bd-dw-icon-desc">手机相册</text>
+			</view>
+		</view>
+	</view>
+	<view slot="footer" class="t-slot-subtitle" bindtap="closeSelectModal">
+		<image class="t-slot-modal-close" src="/images/pic/icon_close.svg"></image>
+	</view>
+</bottom-dialog>
+<!-- 画布-生成预览区 -->
+<canvas canvas-id='preview-canvas' disable-scroll="true" style="width: 1238px;height: 1754px;left: -10000px;top: -10000px; position: fixed; z-index: -10;"></canvas>
+<!-- 预览框 -->
+<cover-view catchtap="closeYuLan" wx:if="{{isShowPreviewModal}}" class="t-yl-modal" >
+	<!-- <cover-view  class="t-md-zhezhao"></cover-view> -->
+	<cover-view class="t-yl-modal-wrap">
+	  <cover-view wx:if="{{previewPic}}" catchtap="emp" class="t-yulan-pic t-flex-row">
+			<cover-image class="t-yulan-pic-img" src="{{previewPic}}"></cover-image>
+		</cover-view>
+		<cover-image catchtap="closeYuLan" class="t-yulan-close" src="/images/certificates/reeor-fill-n.png"></cover-image>
+		<cover-view class="t-yl-sfz">身份证 A4（210mm×297mm）</cover-view>
+	</cover-view>
+</cover-view>

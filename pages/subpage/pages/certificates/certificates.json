@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "bottom-dialog":"/components/half-screen-dialog/half-screen-dialog",
+    "t-confirm":"/components/dialog/dialog"
+  }
+}

@@ -1,0 +1,50 @@
+<image-cropper xm_max_height="{{100}}" xk_mode="{{false}}" wx:if="{{fileSourcePath && isShow}}" id="image-cropper" disable_width="{{true}}" disable_height="{{true}}" width="{{width}}" height="{{height}}" export_scale="{{type}}" imgSrc="{{fileSourcePath}}" bindload="cropperload" min_scale="{{0.2}}" max_scale="{{3}}" bindimageload="loadimage"></image-cropper>
+<image-cropper-6cun boxRealWidth="{{boxRealWidth}}" boxRealHeight="{{boxRealHeight}}" xk_mode="{{true}}" wx:if="{{fileSourcePath && !isShow}}" id="image-cropper1" disable_width="{{true}}" disable_height="{{true}}" width="{{width}}" height="{{height}}" export_scale="{{type}}" imgSrc="{{fileSourcePath}}" bindload="cropperload" min_scale="{{0.2}}" max_scale="{{3}}" xk_mb_url="{{xk_mb_url}}" xk_mb_width="{{xk_mb_width}}" xk_mb_height="{{xk_mb_height}}" bindimageload="loadimage" mm="{{mm}}"></image-cropper-6cun>
+<!-- 底部操作按钮布局 -->
+<view class="t-bottom-opt">
+	<view class="t-bo-wrap t-flex-row-sb">
+		<view class="t-edit-opt t-flex-row-s">
+			<view bindtap="changeOpt" data-opt="1" class="t-opt t-flex-row {{optIdx == 1?'t-active':''}}">裁切</view>
+			<view bindtap="changeOpt" data-opt="2" class="t-opt t-flex-row {{optIdx == 2?'t-active':''}}">留白</view>
+			<view wx:if="{{type == 2}}" bindtap="changeOpt" data-opt="3" class="t-opt t-flex-row {{optIdx == 3?'t-active':''}}">相框</view>
+			<image bindtap="toRotate" class="t-xz-edit" src="/images/pic/xuanzhuan.svg"></image>
+		</view>
+		<view bindtap="getImg" class="t-confirm-btn t-flex-row" hover-class="t-click-class">确定</view>
+	</view>
+</view>
+<!-- 四周裁减提示布局 -->
+<view wx:if="{{!(type==2 && optIdx==3)}}" class="t-cut-desc-top t-flex-row">
+	<image src="/images/pic/scissor.svg"></image>
+	<text>裁切区域</text>
+	<image src="/images/pic/scissor.svg"></image>
+</view>
+<view wx:if="{{!(type==2 && optIdx==3)}}" class="t-cut-desc-left t-flex-col">
+	<image src="/images/pic/scissor.svg"></image>
+	<text>裁切区域</text>
+	<image src="/images/pic/scissor.svg"></image>
+</view>
+<view wx:if="{{!(type==2 && optIdx==3)}}" class="t-cut-desc-right t-flex-col">
+	<image src="/images/pic/scissor.svg"></image>
+	<text>裁切区域</text>
+	<image src="/images/pic/scissor.svg"></image>
+</view>
+<view wx:if="{{!(type==2 && optIdx==3)}}" class="t-cut-desc-bottom">移动缩放图片至合适位置</view>
+<!-- 相框模式底部提示 -->
+<view wx:if="{{type==2 && optIdx==3}}" class="t-xkmo-top-tips">效果如上，可手动放大缩小移动位置</view>
+<view class="t-mb-content" wx:if="{{optIdx == 3}}">
+	<scroll-view class='t-mb-theme' scroll-x="true" scroll-with-animation="true" lower-threshold="0">
+		<view catchtap="changeMbType" data-idx="{{idx}}" wx:for="{{MbList}}" wx:for-item="tp" wx:for-index="idx" wx:key="idx" class="t-mb-theme-item {{mbTypeIdx==idx?'t-mbt-active':''}}">{{tp.typeName}}</view>
+	</scroll-view>
+	<scroll-view class="t-mb-list" scroll-x="true" scroll-with-animation="true" lower-threshold="0" show-scrollbar="{{false}}">
+		<view data-xkmburl="" data-box-top="{{0}}" data-box-width="{{474}}" data-box-height="{{707}}" data-idx="{{-1}}" catchtap="changeTemplate" wx:if="{{mbTypeIdx == 0}}" class="t-mb-pic-item t-no-tp {{mbThuIdx[0]==0 && mbThuIdx[1]==-1?'t-mbp-active':''}}">
+			<view class="t-wu">无</view>
+		</view>
+		<block wx:key="tidx" wx:for="{{childTpList}}" wx:for-item="ctp" wx:for-index="tidx">
+			<view data-xkmburl="{{serverUrl+ctp.path}}" data-box-top="{{ctp.boxTop}}" data-box-width="{{ctp.boxWidth}}" data-box-height="{{ctp.boxHeight}}" data-idx="{{tidx}}" catchtap="changeTemplate" class="t-mb-pic-item {{mbThuIdx[0]==mbTypeIdx && mbThuIdx[1]==tidx?'t-mbp-active':''}}" style="background-image:url('{{serverUrl+ctp.thumbnailPath}}')"></view>
+		</block>
+	</scroll-view>
+</view>
+<canvas canvas-id='mb-canvas' disable-scroll="true" style="width: 474px;height: 707px;left: -200%;top: -200%; position: fixed; z-index: -10;"></canvas>
+<view wx:if="{{resUrl}}" class="t-show-m">
+	<image src="{{resUrl}}"></image>
+</view>

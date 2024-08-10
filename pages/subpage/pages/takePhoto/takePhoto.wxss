@@ -1,0 +1,165 @@
+page,
+.t-pz-con {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.t-ms-txt {
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.t-kuang {
+  box-sizing: border-box;
+  position: relative;
+}
+
+.t-xj {
+  width: 100%;
+  height: 100%;
+}
+
+.t-pz-caozuo {
+  position: absolute;
+}
+
+.t-qd {
+  background: #005BEA;
+  width: 100%;
+  color: #fff;
+}
+
+.t-qx {
+  background: #fff;
+  width: 100%;
+  color: #005BEA;
+}
+
+.t-pz-caozuo-dz {
+  position: absolute;
+}
+
+.t-zm-fg {
+  position: absolute;
+  z-index: 11;
+}
+
+.button-hover {
+  background-color: none !important;
+}
+
+.t-xj-con {
+  width: 100%;
+  height: calc(100% - 148rpx);
+}
+
+.t-xj-cz {
+  width: 100%;
+  height: 148rpx;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+}
+
+.t-xj-pa-area {
+  width: 100%;
+  height: 118rpx;
+  position: relative;
+}
+
+.t-xj-pa-area-pz {
+  width: 118rpx;
+  height: 118rpx;
+}
+
+.t-xj-close {
+  width: 32rpx;
+  height: 32rpx;
+  position: absolute;
+  left: 132rpx;
+  top: 43rpx;
+  padding: 10rpx;
+}
+.t-xj-close1 {
+  width: 32rpx;
+  height: 32rpx;
+  padding: 10rpx;
+  position: relative;
+  left: 10rpx;
+}
+.t-xj-kuang {
+  width: 644rpx;
+  height: 1019rpx;
+  position: relative;
+  padding: 5rpx;
+  /* margin-top: 75rpx; */
+}
+
+.t-zm-fg-gh {
+  width: 255rpx;
+  height: 240rpx;
+  position: absolute;
+  right: 36rpx;
+  top: 36rpx;
+}
+
+.t-zm-fg-rx {
+  width: 429rpx;
+  height: 369rpx;
+  position: absolute;
+  bottom: 48rpx;
+  right: 73rpx;
+}
+
+.t-xj-tips {
+  font-size: 26rpx;
+  color: #fff;
+  /* width: 440rpx; */
+  position: absolute;
+  left: calc(50% + 60rpx);
+  /* height: 27rpx; */
+  transform: rotate(90deg);
+  top: calc(100% - 380rpx);
+}
+
+.t-xj-pza-icon {
+  width: 467rpx;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.t-xj-qr-qq {
+  width: 100%;
+  height: 148rpx;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  z-index: 9;
+}
+
+.t-xxx-wrap {
+  width: 470rpx;
+  height: 104rpx;
+  margin: 0 auto;
+}
+
+.t-xj-qux {
+  width: 104rpx;
+  height: 58rpx;
+  font-size: 30rpx;
+  color: #005BEA;
+  background: #FFFFFF;
+  border-radius: 6rpx;
+  transform: rotate(90deg);
+}
+.t-xj-qued {
+  width: 104rpx;
+  height: 58rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  background: #005BEA;
+  border-radius: 6rpx;
+  transform: rotate(90deg);
+}

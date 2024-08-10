@@ -4,13 +4,23 @@ Component({
     addGlobalClass: true,
   },
   data: {
-    elements: [{
-      title: '文件预览',
-      name: 'filePreview',
-      color: 'cyan',
-      icon: 'read',
-      lastScrollTop: 0,
-    }
-    ],
+  },
+  methods: {
+    toSlectPicSize: function () {
+      wx.navigateTo({
+        url: '/pages/subpage/pages/picSize/picSize',
+      })
+    },
+
+    toPicGen: function () {
+      wx.navigateTo({
+        url: '/pages/subpage/pages/picGen/picGen?type=4'
+      });
+    },
+    toSfz:function () {
+      wx.navigateTo({
+        url: '/pages/subpage/pages/certificates/certificates'
+      });
+    },
   },
 })

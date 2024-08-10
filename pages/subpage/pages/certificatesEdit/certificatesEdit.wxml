@@ -1,0 +1,31 @@
+<cu-custom bgColor="bg-gradual-olive" isBack="{{true}}">
+	<view slot="content">身份证编辑</view>
+</cu-custom>
+<image-cropper sfzType="{{sfzType}}" xk_mb_url="{{sfzType==2?'/images/certificates/gh_bg.png':'/images/certificates/rx_bg.png'}}" sfzBgWidth="{{sfzBgWidth}}" sfzBgHeight="{{sfzBgHeight}}" sfzBgPos1="{{sfzBgPos1}}" sfzBgPos2="{{sfzBgPos2}}" xm_max_height="{{100}}" xk_mode="{{false}}" wx:if="{{src}}" id="image-cropper" disable_width="{{true}}" disable_height="{{true}}" width="{{width}}" height="{{height}}" export_scale="{{5}}" imgSrc="{{src}}"  min_scale="{{0.2}}" max_scale="{{3}}" bindimageload="loadimage"></image-cropper>
+<view class="t-edit-bottom">
+	<view class="t-edit-wrap t-flex-row-sb">
+			<view class="t-cz t-flex-row-s">
+					<view catchtap="toReset" class="t-reset t-flex-row">重置</view>
+					<image catchtap="toRotate" class="t-xz" src="/images/pic/xuanzhuan.svg"></image>
+			</view>
+			<view bindtap="confirmCut" class="t-qd t-flex-row" hover-class="t-click-class">确定</view>
+	</view>
+</view>
+<!-- 裁切区域 -->
+<view wx:if="{{cutTop}}" class="t-cut-desc-top t-flex-row" >
+	<image src="/images/pic/scissor.svg"></image>
+	<text>裁切区域</text>
+	<image src="/images/pic/scissor.svg"></image>
+</view>
+<view wx:if="{{cutTop}}" class="t-cut-desc-left t-flex-col" >
+	<image src="/images/pic/scissor.svg"></image>
+	<text>裁切区域</text>
+	<image src="/images/pic/scissor.svg"></image>
+</view>
+<view wx:if="{{cutTop}}" class="t-cut-desc-right t-flex-col" >
+	<image src="/images/pic/scissor.svg"></image>
+	<text>裁切区域</text>
+	<image src="/images/pic/scissor.svg"></image>
+</view>
+<view wx:if="{{cutTop}}" class="t-cut-desc-bottom">移动缩放图片至合适位置</view>
+<canvas canvas-id='my-canvas' disable-scroll="true" style="width: {{h}}px;height: {{w}}px;left: -10000px;top: -10000px; position: fixed; z-index: -10;"></canvas>

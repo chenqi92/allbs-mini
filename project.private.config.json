@@ -5,5 +5,6 @@
     "compileHotReLoad": true,
     "bigPackageSizeSupport": true,
     "urlCheck": false
-  }
+  },
+  "libVersion": "3.5.3"
 }

@@ -1,8 +1,9 @@
-<cu-custom bgColor="bg-gradual-olive" isBack="{{false}}">
-	<view slot="content">证件照</view>
+<cu-custom bgColor="{{bgColor}}" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">{{title}}生成器</view>
 </cu-custom>
 <!-- 轮播图展示页面 -->
-<view class="t-index-swiper padding-top">
+<view class="t-index-swiper">
 	<swiper class="t-swiper" indicator-color="rgba(255,255,255,0.4)" indicator-active-color="rgba(255,255,255,1)" circular="{{true}}" indicator-dots="{{true}}" autoplay="true" interval="5000" duration="1000">
 		<swiper-item>
 			<image bindtap="toLeap" data-idx="1" class="t-index-sp-img" src="{{'/images/banner/z1.png'}}"></image>

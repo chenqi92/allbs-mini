@@ -1,0 +1,85 @@
+@import '../certificates/certificates.wxss';
+
+.t-zjz-yl-area {
+    width: 540rpx;
+    padding-top: 50rpx;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.t-zjz-yl {
+    width: 540rpx;
+    height: 804rpx;
+    background: #fff;
+}
+
+.t-zjz-yl-pic {
+    width: 471rpx;
+    height: 672rpx;
+}
+
+.t-zjz-cz-bt {
+    width: 540rpx;
+    height: 54rpx;
+    margin: 20rpx auto 140rpx;
+}
+
+.t-zjz-cz-bt-desc text:nth-child(1) {
+    font-size: 30rpx;
+    color: #272727;
+    font-weight: bold;
+}
+
+.t-zjz-cz-bt-desc text:nth-child(2) {
+    font-size: 30rpx;
+    color: #2C2C2C;
+    margin-left: 10rpx;
+}
+
+.t-zy {
+    font-size: 30rpx;
+    color: #2C2C2C;
+}
+
+.t-set-copies {
+    width: 240rpx;
+    height: 54rpx;
+    /* margin: 0rpx auto 0rpx; */
+    border: 1rpx solid #CFCFCF;
+    border-radius: 10rpx;
+    background: #FFFFFF;
+}
+.t-yl-sfz{
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #c4c4c4;
+    height: 766rpx;
+}
+
+.t-yl-sfz-img{
+    width: 100%;
+    height: 100%;
+}
+
+.t-set-copies image {
+    width: 27rpx;
+    height: 26rpx;
+    padding: 10rpx;
+}
+
+.t-set-copies text {
+    font-size: 30rpx;
+    color: #272727;
+    width: 108rpx;
+    text-align: center;
+}
+
+.t-save {
+    width: 100%;
+    height: 100rpx;
+    background: #259f38;
+    color: #fff;
+    position: fixed;
+    bottom: 0rpx;
+}

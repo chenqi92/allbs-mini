@@ -1,0 +1,25 @@
+<!-- 画布-生成预览区 -->
+<canvas canvas-id='preview-canvas' disable-scroll="true" style="width: 1051px;height: 1500px;left: -10000px;top: -10000px; position: fixed; z-index: -10;"></canvas>
+<!-- 预览区 -->
+<view class="t-zjz-yl-area">
+    <view class="t-zjz-yl t-flex-row" wx:if="{{zjzType!=3}}">
+        <image class="t-zjz-yl-pic" wx:if="{{previewPic}}" src="{{previewPic}}"></image>
+    </view>
+    <view class="t-yl-sfz t-flex-row" wx:if="{{zjzType==3}}">
+        <image class="t-yl-sfz-img" wx:if="{{previewPic}}" src="{{previewPic}}"></image>
+    </view>
+</view>
+<view class="t-zjz-cz-bt t-flex-row-sb" wx:if="{{zjzType}}">
+    <view class="t-zjz-cz-bt-desc">
+        <text wx:if="{{zjzType!=3}}">{{zjzType==1?1:2}}寸照片</text>
+        <text wx:if="{{zjzType!=3}}">{{zjzType==1?9:4}}个/张</text>
+        <text wx:if="{{zjzType==3}}">身份证A4/1张</text>
+    </view>
+    <view class="t-zy" wx:if="{{zjzType!=3}}">
+        注：6寸相纸排版
+    </view>
+</view>
+<!-- 底部操作 -->
+<view class="t-save t-flex-row" hover-class="t-click-class" bindtap="savePic">
+    保存到相册
+</view>

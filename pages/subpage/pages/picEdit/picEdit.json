@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "image-cropper": "/components/image-cropper-kevy/image-cropper",
+    "image-cropper-6cun": "/components/image-cropper-kevy-6cun/image-cropper"
+  },
+  "disableScroll": true
+}

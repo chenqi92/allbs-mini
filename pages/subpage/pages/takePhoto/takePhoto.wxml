@@ -1,0 +1,28 @@
+<cu-custom bgColor="bg-gradual-olive" isBack="{{true}}">
+	<view slot="content">身份证拍照</view>
+</cu-custom>
+<view class="t-xj-con t-flex-row">
+	<view class="t-xj-kuang" style="background-size: 100% 100%;background-repeat: no-repeat;background-image:url('/images/certificates/kuang_x.png')">
+		<camera wx:if="{{!photoPic && hasAuthPhoto}}" class="t-xj" binderror="error"></camera>
+		<cover-image wx:if="{{!photoPic && sfzType==1}}" class="t-zm-fg-rx" src="/images/certificates/touxaing_x.png"></cover-image>
+		<cover-image wx:if="{{!photoPic && sfzType==2}}" class="t-zm-fg-gh" src="/images/certificates/guohui_x.png"></cover-image>
+		<image class="t-xj" wx:if="{{photoPic}}" src="{{photoPic}}"></image>
+		<!-- <cover-view class="t-xj-tips">请调整好光线，将身份证{{sfzType==2?"背面":"正面"}}移入框内</cover-view> -->
+	</view>
+</view>
+<view class="t-xj-cz" wx:if="{{!photoPic}}">
+	<view class="t-xj-pa-area ">
+		<view class="t-xj-pza-icon t-flex-row">
+			<image wx:if="{{hasAuthPhoto}}" bindtap="paizhao"  class="t-xj-pa-area-pz" src="/images/certificates/camera_x.png"></image>
+		</view>
+		<image bindtap="guanbi" class="t-xj-close" src="/images/certificates/close-white.png"></image>
+	</view>
+</view>
+<view class="t-xj-qr-qq" wx:if="{{photoPic}}">
+		<view class="t-xxx-wrap t-flex-row-sb">
+				<image bindtap="quxiao" class="t-xj-close1" src="/images/certificates/close-white.png"></image>
+				<!-- <view bindtap="quxiao" class="t-xj-qux t-flex-row">取消</view> -->
+				<view bindtap="queding" class="t-xj-qued t-flex-row">确定</view>
+		</view>
+</view>
+<canvas canvas-id='my-canvas' disable-scroll="true" style="width: {{h}}px;height: {{w}}px;left: -10000px;top: -10000px; position: fixed; z-index: -10;"></canvas>

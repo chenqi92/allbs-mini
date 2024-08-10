@@ -11,7 +11,23 @@
     "pages/toolbox/wordGuessing/wordGuessing",
     "pages/toolbox/uglyAvatar/uglyAvatar",
     "pages/toolbox/cutout/cutout",
-    "pages/random/home/home"
+    "pages/random/home/home",
+    "pages/toolbox/idPhoto/idPhoto"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/subpage",
+      "pages": [
+        "pages/certificates/certificates",
+        "pages/certificatesEdit/certificatesEdit",
+        "pages/idPhoto/idPhoto",
+        "pages/idPhotoPreview/idPhotoPreview",
+        "pages/picEdit/picEdit",
+        "pages/picGen/picGen",
+        "pages/picSize/picSize",
+        "pages/takePhoto/takePhoto"
+      ]
+    }
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

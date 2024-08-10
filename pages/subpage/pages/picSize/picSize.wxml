@@ -1,0 +1,45 @@
+<cu-custom bgColor="bg-gradual-olive" isBack="{{true}}">
+	<view slot="content">选择尺寸</view>
+</cu-custom>
+<view class="t-body">
+	<view bindtap="toZjz" class="t-item t-flex-row-sb" hover-class="t-item-click">
+		<view class="t-flex-row-s t-i-l">
+			<image src="/images/pic/idphoto/zjz.png"></image>
+			<view class="t-flex-col-s t-i-desc-zjz">
+				<text class="t-sz-zjz">证件照</text>
+				<view class="t-sz-zjz1"><text>1寸</text><text>25mm*35mm</text></view>
+				<view class="t-sz-zjz2"><text>2寸</text><text>35mm*49mm</text></view>
+			</view>
+		</view>
+		<view class="t-flex-row-e t-i-r">
+			<text>去生成</text>
+			<image src="/images/pic/icon_arrow-right.svg"></image>
+		</view>
+	</view>
+	<view data-tp="1" bindtap="toPicGen" class="t-item t-flex-row-sb" hover-class="t-item-click">
+		<view class="t-flex-row-s t-i-l">
+			<image src="/images/pic/5cun.svg"></image>
+			<view class="t-flex-col-s t-i-desc">
+				<text>5寸照片</text>
+				<text>127mm*89mm</text>
+			</view>
+		</view>
+		<view class="t-flex-row-e t-i-r">
+			<text>去生成</text>
+			<image src="/images/pic/icon_arrow-right.svg"></image>
+		</view>
+	</view>
+	<view data-tp="2" bindtap="toPicGen" class="t-item t-flex-row-sb" hover-class="t-item-click">
+		<view class="t-flex-row-s t-i-l">
+			<image src="/images/pic/6cun.svg"></image>
+			<view class="t-flex-col-s t-i-desc">
+				<text>6寸照片</text>
+				<text>152mm*102mm</text>
+			</view>
+		</view>
+		<view class="t-flex-row-e t-i-r">
+			<text>去生成</text>
+			<image src="/images/pic/icon_arrow-right.svg"></image>
+		</view>
+	</view>
+</view>
