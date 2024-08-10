@@ -1,11 +1,12 @@
 <!-- pages/index/index.wxml -->
-<cu-custom bgColor="{{bgColor}}" isBack="{{true}}">
+<cu-custom bgColor="{{bgColor}}" isBack="{{true}}" style="height: 100rpx;">
     <view slot="backText">返回</view>
     <view slot="content">{{title}}</view>
 </cu-custom>
 <view class="container">
-    <canvas type="2d" id="canvas" style="width: 100%; height: 100vh;"></canvas>
+    <canvas type="2d" id="canvas"
+            bindtouchstart="onTouchStart"
+            bindtouchmove="onTouchMove"
+            bindtouchend="onTouchEnd"
+            style="width: 100%; height: 100%;"></canvas>
 </view>
-
-
-

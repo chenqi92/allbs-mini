@@ -2,26 +2,31 @@
     <view slot="backText">返回</view>
     <view slot="content">{{title}}</view>
 </cu-custom>
-<view class="container">
-    <view class="placeholder" bindtap="showModal" data-target="RadioModal">
-        <view wx:if="{{!imageSrc}}" class="placeholder-text">点击选择图片</view>
-        <image wx:if="{{imageSrc}}" src="{{imageSrc}}" mode="aspectFit" class="image"></image>
+<scroll-view scroll-y class="scrollPage-with-header">
+    <view class="container">
+        <view class="placeholder" bindtap="showModal" data-target="RadioModal">
+            <view wx:if="{{!imageSrc}}" class="placeholder-text">点击选择图片</view>
+            <image wx:if="{{imageSrc}}" src="{{imageSrc}}" mode="aspectFit" class="image"></image>
+        </view>
+        <button style="width:80%" class="cu-btn bg-red margin-tb-sm lg" bindtap="removeBg"
+                disabled="{{buttonDisabled}}">
+            <view wx:if="{{!buttonDisabled}}">一键抠图</view>
+            <view wx:if="{{buttonDisabled}}">重新上传图片后可点击</view>
+        </button>
+        <view class="result" wx:if="{{resultImageSrc}}">
+            <image src="{{resultImageSrc}}" mode="aspectFit" class="image"></image>
+        </view>
+        <button style="width:80%" class="cu-btn block bg-blue margin-tb-sm lg" wx:if="{{resultImageSrc}}"
+                bindtap="downloadImage">下载图片
+        </button>
+        <view class='cu-load load-modal' wx:if="{{loading}}">
+            <image src='https://nas.allbs.cn:9006/cloudpic/cloudpic/2024/07/88af384e698c5b47819c8be2bb3f33b8.png'
+                   class='png' mode='aspectFit'></image>
+            <view class='gray-text'>自动抠图中...</view>
+        </view>
     </view>
-    <button style="width:80%" class="cu-btn bg-red margin-tb-sm lg" bindtap="removeBg" disabled="{{buttonDisabled}}">
-        <view wx:if="{{!buttonDisabled}}">一键抠图</view>
-        <view wx:if="{{buttonDisabled}}">重新上传图片后可点击</view>
-    </button>
-    <view class="result" wx:if="{{resultImageSrc}}">
-        <image src="{{resultImageSrc}}" mode="aspectFit" class="image"></image>
-    </view>
-    <button style="width:80%" class="cu-btn block bg-blue margin-tb-sm lg" wx:if="{{resultImageSrc}}" bindtap="downloadImage">下载图片</button>
-    <view class='cu-load load-modal' wx:if="{{loading}}">
-        <image src='https://nas.allbs.cn:9006/cloudpic/cloudpic/2024/07/88af384e698c5b47819c8be2bb3f33b8.png' class='png' mode='aspectFit'></image>
-        <view class='gray-text'>自动抠图中...</view>
-    </view>
-</view>
-
-<!-- 模态框 -->
+</scroll-view>
+        <!-- 模态框 -->
 <view class="cu-modal {{modalName=='RadioModal'?'show':''}}" bindtap="hideModal">
     <view class="cu-dialog" catchtap="true">
         <radio-group class="block">

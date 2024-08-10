@@ -8,8 +8,9 @@ Component({
       title: '文件预览',
       name: 'filePreview',
       color: 'cyan',
-      icon: 'read'
+      icon: 'read',
+      lastScrollTop: 0,
     }
     ],
-  }
+  },
 })

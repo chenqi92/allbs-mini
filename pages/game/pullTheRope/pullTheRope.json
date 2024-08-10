@@ -1,5 +1,4 @@
 {
   "usingComponents": {},
-  "component": true,
-  "canvas": true
+  "disableScroll": true
 }
