@@ -1,266 +1,202 @@
 const app = getApp(); // 确保能够访问全局变量
 
 Page({
+  canvasContext: null,
   data: {
+    points: [],
+    sticks: [],
+    draggedPoint: null,
+    friction: 0.99,
+    gravityStrength: 0.5,
+    windStrength: 0,
+    fluidMotion: 0.05,
+    stickStrength: 0.03,
+    tearStrengthVal: 47.5, // Initial tear strength (95% of 50)
+    clothSize: 30, // 固定初始大小
     bgColor: '',
     title: '',
-    clothSize: 30,
-    tension: 50,
-    gravity: 50,
-    wind: 0,
-    tearStrength: 95,
-    damping: 99,
   },
 
-  onLoad: function (options) {
+  onLoad(options) {
     const { title, color } = options;
     this.setData({
       bgColor: `bg-gradual-${color}`,
       title: title
     });
 
-    wx.createSelectorQuery().select('#canvas').boundingClientRect(rect => {
-      if (rect) {
-        this.initCanvas(rect);
-      } else {
-        console.error('Failed to retrieve canvas bounding rect');
-      }
-    }).exec();
+    const that = this;
+
+    wx.createSelectorQuery().select('#canvas').node().exec((res) => {
+      const canvas = res[0].node;
+      const ctx = canvas.getContext('2d');
+
+      // 获取设备屏幕尺寸
+      const systemInfo = wx.getSystemInfoSync();
+      canvas.width = systemInfo.windowWidth;
+      canvas.height = systemInfo.windowHeight;
+
+      that.canvasContext = ctx;
+      that.canvas = canvas;
+
+      // 调整 createCloth 以使用整个屏幕尺寸
+      that.createCloth(canvas.width, canvas.height);
+      that.updateCanvas(1 / 60);
+    });
   },
 
-  initCanvas: function (rect) {
-    const canvasWidth = rect.width;
-    const canvasHeight = rect.height;
+  createCloth(canvasWidth, canvasHeight) {
+    const { clothSize } = this.data;
+    const that = this;
 
-    wx.createSelectorQuery()
-        .select('#canvas')
-        .fields({ node: true, size: true })
-        .exec((res) => {
-          const canvas = res[0].node;
-          const ctx = canvas.getContext('2d');
-
-          canvas.width = canvasWidth;
-          canvas.height = canvasHeight;
-
-          this.initSimulation(ctx, canvasWidth, canvasHeight, canvas);
-        });
-  },
-
-  initSimulation: function (ctx, canvasWidth, canvasHeight, canvas) {
-    class Point {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.oldX = x;
-        this.oldY = y;
-        this.vx = 0;
-        this.vy = 0;
-        this.pinned = false;
-        this.tension = 0;
-      }
-
-      update(dt) {
-        if (this.pinned) return;
-
-        const vx = (this.x - this.oldX) * friction;
-        const vy = (this.y - this.oldY) * friction;
-
-        this.oldX = this.x;
-        this.oldY = this.y;
-
-        this.x += vx;
-        this.y += vy;
-
-        this.y += gravityStrength * dt;
-        this.x += windStrength * dt;
-
-        this.x += (Math.random() - 0.5) * fluidMotion;
-        this.y += (Math.random() - 0.5) * fluidMotion;
-
-        this.x = Math.max(0, Math.min(this.x, canvasWidth));
-        this.y = Math.max(0, Math.min(this.y, canvasHeight));
-      }
-    }
-
-    class Stick {
-      constructor(p1, p2) {
-        this.p1 = p1;
-        this.p2 = p2;
-        this.length = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-        this.stiffness = 0.5;
-        this.tension = 0;
-      }
-
-      update() {
-        const dx = this.p2.x - this.p1.x;
-        const dy = this.p2.y - this.p1.y;
-        const distance = Math.hypot(dx, dy);
-        const difference = this.length - distance;
-        const percent = (difference / distance) * this.stiffness;
-        const offsetX = dx * percent;
-        const offsetY = dy * percent;
-
-        if (!this.p1.pinned) {
-          this.p1.x -= offsetX * stickStrength;
-          this.p1.y -= offsetY * stickStrength;
-        }
-        if (!this.p2.pinned) {
-          this.p2.x += offsetX * stickStrength;
-          this.p2.y += offsetY * stickStrength;
-        }
-
-        this.tension = Math.abs(difference) / tearStrength;
-        this.p1.tension = Math.max(this.p1.tension, this.tension);
-        this.p2.tension = Math.max(this.p2.tension, this.tension);
-
-        if (tearStrength < 50) {
-          if (Math.abs(difference) > tearStrength && this.p1 !== draggedPoint && this.p2 !== draggedPoint) {
-            return true;
-          }
-        }
-        return false;
-      }
-    }
-
+    const rows = clothSize;
+    const cols = clothSize;
+    const spacing = Math.min(canvasWidth, canvasHeight) * 0.7 / (clothSize + 5);
     let points = [];
     let sticks = [];
-    let draggedPoint = null;
-    let mouseX = 0;
-    let mouseY = 0;
 
-    let friction = 0.99;
-    let gravityStrength = 0.5;
-    let windStrength = 0;
-    const fluidMotion = 0.05;
-    let stickStrength = 0.03;
-    let tearStrength = 47.5;
-    let clothSize = 30;
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const p = that.createPoint(
+            canvasWidth / 2 - cols * spacing / 2 + x * spacing,
+            canvasHeight * 0.1 + y * spacing
+        );
+        if (y === 0) p.pinned = true;
+        points.push(p);
 
-    const createCloth = () => {
-      points = [];
-      sticks = [];
-
-      const rows = clothSize;
-      const cols = clothSize;
-      const spacing = Math.min(canvasWidth, canvasHeight) * 0.7 / (clothSize + 5);
-
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const p = new Point(
-              canvasWidth / 2 - cols * spacing / 2 + x * spacing,
-              canvasHeight * 0.1 + y * spacing
-          );
-          if (y === 0) {
-            p.pinned = true;
-          }
-          points.push(p);
-
-          if (x > 0) {
-            sticks.push(new Stick(points[y * cols + x], points[y * cols + x - 1]));
-          }
-          if (y > 0) {
-            sticks.push(new Stick(points[y * cols + x], points[(y - 1) * cols + x]));
-          }
-        }
+        if (x > 0) sticks.push(that.createStick(points[y * cols + x], points[y * cols + x - 1]));
+        if (y > 0) sticks.push(that.createStick(points[y * cols + x], points[(y - 1) * cols + x]));
       }
     }
+    that.setData({ points, sticks });
+  },
 
-    const getTensionColor = (tension) => {
-      tension = Math.min(tension, 1);
-      const r = Math.floor(255 * tension);
-      const g = Math.floor(255 * (1 - tension));
-      const b = 0;
-      return `rgb(${r}, ${g}, ${b})`;
+  createPoint(x, y) {
+    return { x, y, oldX: x, oldY: y, vx: 0, vy: 0, pinned: false, tension: 0 };
+  },
+
+  createStick(p1, p2) {
+    return { p1, p2, length: Math.hypot(p1.x - p2.x, p1.y - p2.y), stiffness: 0.5, tension: 0 };
+  },
+
+  getTensionColor(tension) {
+    tension = Math.min(tension, 1); // Clamp tension to 1
+    const r = Math.floor(255 * tension);
+    const g = Math.floor(255 * (1 - tension));
+    const b = 0;
+    return `rgb(${r}, ${g}, ${b})`;
+  },
+
+  updateCanvas(dt) {
+    const { points, sticks } = this.data;
+    const ctx = this.canvasContext;
+
+    points.forEach(p => {
+      this.updatePoint(p, dt);
+      p.tension = 0; // Reset tension for recalculation
+    });
+
+    if (this.data.draggedPoint && !this.data.draggedPoint.pinned) {
+      this.data.draggedPoint.x = this.data.mouseX;
+      this.data.draggedPoint.y = this.data.mouseY;
     }
 
-    const update = (dt) => {
-      points.forEach(p => {
-        p.update(dt);
-        p.tension = 0;
-      });
+    this.setData({
+      sticks: sticks.filter(stick => !this.updateStick(stick))
+    });
 
-      if (draggedPoint && !draggedPoint.pinned) {
-        draggedPoint.x = mouseX;
-        draggedPoint.y = mouseY;
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Draw sticks (cloth)
+    sticks.forEach(s => {
+      ctx.strokeStyle = this.getTensionColor(s.tension);
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(s.p1.x, s.p1.y);
+      ctx.lineTo(s.p2.x, s.p2.y);
+      ctx.stroke();
+    });
+
+    // Draw points
+    points.forEach(p => {
+      ctx.fillStyle = this.getTensionColor(p.tension);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Highlight pinned points
+    ctx.fillStyle = 'rgba(255, 0, 0, 0.8)';
+    points.filter(p => p.pinned).forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Highlight dragged point
+    if (this.data.draggedPoint) {
+      ctx.fillStyle = 'rgba(255, 255, 0, 0.8)';
+      ctx.beginPath();
+      ctx.arc(this.data.draggedPoint.x, this.data.draggedPoint.y, 7, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Use setTimeout instead of requestAnimationFrame
+    setTimeout(() => {
+      this.updateCanvas(1 / 60);
+    }, 1000 / 60); // Approximate 60 FPS
+  },
+
+  updatePoint(p, dt) {
+    if (p.pinned) return;
+
+    const { friction, gravityStrength, windStrength, fluidMotion } = this.data;
+    const vx = (p.x - p.oldX) * friction;
+    const vy = (p.y - p.oldY) * friction;
+
+    p.oldX = p.x;
+    p.oldY = p.y;
+
+    p.x += vx;
+    p.y += vy;
+
+    p.y += gravityStrength * dt;
+    p.x += windStrength * dt;
+
+    p.x += (Math.random() - 0.5) * fluidMotion;
+    p.y += (Math.random() - 0.5) * fluidMotion;
+
+    p.x = Math.max(0, Math.min(p.x, this.canvas.width));
+    p.y = Math.max(0, Math.min(p.y, this.canvas.height));
+  },
+
+  updateStick(stick) {
+    const dx = stick.p2.x - stick.p1.x;
+    const dy = stick.p2.y - stick.p1.y;
+    const distance = Math.hypot(dx, dy);
+    const difference = stick.length - distance;
+    const percent = (difference / distance) * stick.stiffness;
+    const offsetX = dx * percent;
+    const offsetY = dy * percent;
+
+    if (!stick.p1.pinned) {
+      stick.p1.x -= offsetX * this.data.stickStrength;
+      stick.p1.y -= offsetY * this.data.stickStrength;
+    }
+    if (!stick.p2.pinned) {
+      stick.p2.x += offsetX * this.data.stickStrength;
+      stick.p2.y += offsetY * this.data.stickStrength;
+    }
+
+    stick.tension = Math.abs(difference) / this.data.tearStrengthVal;
+    stick.p1.tension = Math.max(stick.p1.tension, stick.tension);
+    stick.p2.tension = Math.max(stick.p2.tension, stick.tension);
+
+    // Check for tearing only if tear strength is not at maximum
+    if (this.data.tearStrength < 50) {
+      if (Math.abs(difference) > this.data.tearStrength && stick.p1 !== this.data.draggedPoint && stick.p2 !== this.data.draggedPoint) {
+        return true; // Stick should be removed
       }
-
-      sticks = sticks.filter(stick => !stick.update());
-
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-
-      sticks.forEach(s => {
-        ctx.strokeStyle = getTensionColor(s.tension);
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(s.p1.x, s.p1.y);
-        ctx.lineTo(s.p2.x, s.p2.y);
-        ctx.stroke();
-      });
-
-      points.forEach(p => {
-        ctx.fillStyle = getTensionColor(p.tension);
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      ctx.fillStyle = 'rgba(255, 0, 0, 0.8)';
-      points.filter(p => p.pinned).forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      if (draggedPoint) {
-        ctx.fillStyle = 'rgba(255, 255, 0, 0.8)';
-        ctx.beginPath();
-        ctx.arc(draggedPoint.x, draggedPoint.y, 7, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      canvas.requestAnimationFrame(() => update(1 / 60));
     }
-
-    const init = () => {
-      createCloth();
-      update(1 / 60);
-    }
-
-    const getClosestPoint = (x, y) => {
-      let closestPoint = null;
-      let minDistance = Infinity;
-
-      points.forEach(p => {
-        const distance = Math.hypot(p.x - x, p.y - y);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestPoint = p;
-        }
-      });
-
-      return minDistance < 20 ? closestPoint : null;
-    }
-
-    this.getClosestPoint = getClosestPoint;
-    this.draggedPoint = null;
-
-    canvas.addEventListener('touchstart', (e) => {
-      const touch = e.touches[0];
-      mouseX = touch.clientX;
-      mouseY = touch.clientY;
-      this.draggedPoint = getClosestPoint(mouseX, mouseY);
-    });
-
-    canvas.addEventListener('touchmove', (e) => {
-      const touch = e.touches[0];
-      mouseX = touch.clientX;
-      mouseY = touch.clientY;
-    });
-
-    canvas.addEventListener('touchend', () => {
-      this.draggedPoint = null;
-    });
-
-    init();
+    return false;
   }
 });

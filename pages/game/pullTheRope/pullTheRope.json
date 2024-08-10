@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "Hangman Game"
+  "usingComponents": {},
+  "component": true,
+  "canvas": true
 }
