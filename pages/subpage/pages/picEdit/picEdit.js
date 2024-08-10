@@ -1,4 +1,3 @@
-var HTTP = require("../../../../utils/http.js");
 var ratio = 0.9;
 var ratioEnable = false;
 var xkmbList = [{
@@ -464,7 +463,7 @@ Page({
         const $ = this;
         const oldAngle = $.cropper.data.angle;
         let newAngle;
-        if (oldAngle % 90 == 0) {
+        if (oldAngle % 90 === 0) {
             newAngle = oldAngle + 90;
         } else {
             if (oldAngle > 0) {
@@ -475,7 +474,7 @@ Page({
         }
         newAngle = newAngle > 360 ? (newAngle - 360) : newAngle;
         newAngle = newAngle < -360 ? (Math.abs(newAngle + 360)) : newAngle;
-        newAngle = newAngle == 0 ? 0 : newAngle;
+        newAngle = newAngle === 0 ? 0 : newAngle;
         $.cropper.setAngle(newAngle);
     }
 

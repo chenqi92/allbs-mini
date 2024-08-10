@@ -1,128 +1,143 @@
-var HTTP = require("../../../../utils/http.js");
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
-        ww: wx.getSystemInfoSync().windowWidth,
-        wh: wx.getSystemInfoSync().windowHeight,
-        zjzType: 1,//证件照类型：1-1寸 2-2寸
-        isShowBottomDialog: false,//是否显示底部文件选择弹窗
-        isScale: false,//是否缩放，针对小屏高度小于603
+        ww: wx.getAppBaseInfo().windowWidth,
+        wh: wx.getAppBaseInfo().windowHeight,
+        zjzType: 1, // 证件照类型：1-1寸 2-2寸
+        isShowBottomDialog: false, // 是否显示底部文件选择弹窗
+        isScale: false, // 是否缩放，针对小屏高度小于603
+        src: '', // 当前选择的图片路径
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function (options) {
         if (this.data.wh < 603) {
-            this.setData({isScale: true});
+            this.setData({ isScale: true });
         }
     },
-    //初始化裁减框
+
+    // 初始化裁剪框
     initCroper: function (imgPath) {
         wx.showLoading({
             title: '准备中请耐心等待...',
             mask: true
-        })
-        const $ = this;
-        const isScale = $.data.isScale;
-        var w = $.toPx(isScale ? 488 * 0.9 : 488);
-        var h = $.toPx(isScale ? 684 * 0.9 : 684);
+        });
+
+        const isScale = this.data.isScale;
+        const w = this.toPx(isScale ? 488 * 0.9 : 488);
+        const h = this.toPx(isScale ? 684 * 0.9 : 684);
+
         wx.getImageInfo({
             src: imgPath,
             success: (res) => {
-                $.setData({width: w, height: h, src: JSON.stringify(res)}, () => {
-                    setTimeout(() => {
-                        wx.hideLoading()
-                    }, 2500);
+                this.setData({
+                    width: w,
+                    height: h,
+                    src: imgPath // 直接使用本地路径
+                }, () => {
+                    wx.hideLoading();
+                });
+            },
+            fail: (res) => {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '加载图片失败',
+                    icon: 'none'
                 });
             }
         });
     },
-    //确定裁减
+
+    // 确定裁剪
     confirmCut: function () {
-        const $ = this;
-        const src = $.data.src;
-        const zjzType = $.data.zjzType;
-        if (src && $.cropper) {
-            $.cropper.getImg(function (res) {
+        const src = this.data.src;
+        const zjzType = this.data.zjzType;
+        if (src && this.cropper) {
+            this.cropper.getImg(function (res) {
                 wx.redirectTo({
                     url: '../idPhotoPreview/idPhotoPreview?zjzType=' + zjzType + "&pic=" + res.url,
-                })
+                });
             });
         }
     },
-    //rpx转px
+
+    // rpx 转 px
     toPx: function (d) {
-        var ww = this.data.ww;
-        return ww * d / 750;
+        return this.data.ww * d / 750;
     },
-    //裁减框加载图片
+
+    // 裁剪框加载图片
     loadimage(e) {
-        const $ = this;
-        $.cropper = $.selectComponent("#image-cropper");
-        $.cropper._imgComputeSize(false);
-        $.setData({cutTop: $.cropper.data.cut_top, cutHeight: $.cropper.data.height});
+        this.cropper = this.selectComponent("#image-cropper");
+        this.cropper._imgComputeSize(false);
+        this.setData({
+            cutTop: this.cropper.data.cut_top,
+            cutHeight: this.cropper.data.height
+        });
     },
-    //旋转
+
+    // 旋转图片
     toRotate: function () {
-        const $ = this;
-        const oldAngle = $.cropper.data.angle;
-        let newAngle;
-        if (oldAngle % 90 == 0) {
-            newAngle = oldAngle + 90;
-        } else {
-            if (oldAngle > 0) {
-                newAngle = (parseInt(oldAngle / 90) + 1) * 90;
-            } else {
-                newAngle = parseInt(oldAngle / 90) * 90;
-            }
-        }
-        newAngle = newAngle > 360 ? (newAngle - 360) : newAngle;
-        newAngle = newAngle < -360 ? (Math.abs(newAngle + 360)) : newAngle;
-        newAngle = newAngle == 0 ? 0 : newAngle;
-        $.cropper.setAngle(newAngle);
+        const oldAngle = this.cropper.data.angle;
+        let newAngle = (Math.ceil(oldAngle / 90) * 90) % 360;
+        this.cropper.setAngle(newAngle === 360 ? 0 : newAngle);
     },
-    //切换大小
+
+    // 切换证件照类型
     changeZjzType: function (e) {
         const tp = Number(e.currentTarget.dataset.tp);
-        this.setData({zjzType: tp});
+        this.setData({ zjzType: tp });
     },
-    //显示选择图片底部弹窗
+
+    // 显示选择图片底部弹窗
     toSelectPic: function () {
-        this.setData({isShowBottomDialog: true});
+        this.setData({ isShowBottomDialog: true });
     },
-    //点击底部选择弹框关闭按钮
+
+    // 关闭底部选择弹框
     closeSelectModal: function () {
-        this.setData({isShowBottomDialog: false});
+        this.setData({ isShowBottomDialog: false });
     },
-    //点击底部选择弹框本地或微信文件事件
+
+    // 选择文件（微信照片或手机相册）
     selectFile: function (e) {
-        const $ = this;
-        var opr = e.currentTarget.dataset.opr;
-        if (opr == "1") {
-            //微信图片
-            wx.chooseMessageFile({
-                count: 1,
-                type: 'image',
-                extension: ['png', 'jpg', 'jpeg'],
-                success(res) {
-                    $.initCroper(res.tempFiles[0].path);
+        const opr = e.currentTarget.dataset.opr;
+        const chooseFunction = opr == "1" ? wx.chooseMessageFile : wx.chooseImage;
+        const options = opr == "1" ? { count: 1, type: 'image', extension: ['png', 'jpg', 'jpeg'] } : { count: 1, sizeType: ['original'], sourceType: ['album', 'camera'] };
+
+        chooseFunction({
+            ...options,
+            success: (res) => {
+                const path = opr == "1" ? res.tempFiles[0].path : res.tempFilePaths[0];
+                this.handleImageSelect(path);
+            }
+        });
+
+        this.closeSelectModal();
+    },
+
+    // 处理选择的图片
+    handleImageSelect: function (filePath) {
+        wx.getFileSystemManager().getFileInfo({
+            filePath,
+            success: (info) => {
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                if (info.size > maxSize) {
+                    wx.showToast({ title: '文件大小超过10MB', icon: 'none' });
+                    return;
                 }
-            })
-        } else {
-            //手机相册
-            wx.chooseImage({
-                count: 1,
-                sizeType: ['original'],
-                sourceType: ['album'],
-                success(res) {
-                    $.initCroper(res.tempFiles[0].path);
-                }
-            })
-        }
-        $.closeSelectModal();
+                this.setData({
+                    src: filePath,
+                    buttonDisabled: false, // 允许裁剪操作
+                });
+                this.initCroper(filePath); // 初始化裁剪
+            }
+        });
+    },
+
+    // 使用2D Canvas API绘制内容
+    drawOnCanvas() {
+        const ctx = wx.createCanvasContext('myCanvas', this); // 使用id获取Canvas上下文
+        ctx.fillStyle = 'red';
+        ctx.fillRect(10, 10, 150, 100);
+        ctx.draw();
     }
-})
+});

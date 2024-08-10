@@ -1,4 +1,4 @@
-var HTTP = require("../../../../utils/http.js");
+
 var ratio = 0.95;
 var ratioEnable = false;
 Page({
@@ -8,7 +8,7 @@ Page({
      */
     data: {
         src: '',
-        ww: wx.getSystemInfoSync().windowWidth,
+        ww: wx.getAppBaseInfo().windowWidth,
         w: 0,
         h: 0,
     },
@@ -22,7 +22,7 @@ Page({
             title: '初始化...',
             mask: true
         })
-        var winh = wx.getSystemInfoSync().windowHeight;
+        var winh = wx.getAppBaseInfo().windowHeight;
         if (winh < 600) {
             //比iphone6小的屏适配
             ratioEnable = true;

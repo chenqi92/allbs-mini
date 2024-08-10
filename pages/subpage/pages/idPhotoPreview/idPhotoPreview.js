@@ -1,4 +1,3 @@
-var HTTP = require("../../../../utils/http.js");
 Page({
 
     /**
