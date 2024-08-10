@@ -48,7 +48,6 @@
         <view class="t-add-txt">上传照片</view>
     </view>
 </view>
-
         <!-- 底部提示 -->
 <view class="t-zjz-ms1">
     <text>{{zjzType == 2 ? 2 : 1}}寸照片</text>
