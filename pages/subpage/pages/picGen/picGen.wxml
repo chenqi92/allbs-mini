@@ -1,5 +1,5 @@
 <cu-custom bgColor="bg-gradual-olive" isBack="{{true}}">
-	<view slot="content">A4图片生成</view>
+	<view slot="content">{{title}}</view>
 </cu-custom>
 <!-- 有图 -->
 <view wx:if="{{lastPic}}" class="t-print-list-body">
@@ -7,7 +7,7 @@
 	<view class="t-pl-wrap t-flex-row">
 		<view class="t-pl-sw" style="width: {{w}}px;height: {{h}}px;">
             <image class="t-prw-img" src="{{lastPic}}"></image>
-        </view>    
+        </view>
 	</view>
 </view>
 <!-- 无图 -->

@@ -6,6 +6,7 @@ Page({
     data: {
         previewPic: null,//预览图片
         zjzType: null,
+        title: ""
     },
 
     /**
@@ -13,12 +14,11 @@ Page({
      */
     onLoad: function (options) {
         const zjzType = Number(options.zjzType);
-        wx.setNavigationBarTitle({
-            title: (zjzType === 3 ? "身份证" : (zjzType + "寸照片")) + "预览",
-        })
+        const title = (zjzType === 3 ? "身份证" : (zjzType + "寸照片")) + "预览";
+        this.setData({title: title})
         const pic = options.pic;
 
-        if (zjzType != 3) {
+        if (zjzType !== 3) {
             this.setData({
                 zjzType: zjzType
             });

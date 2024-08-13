@@ -1,3 +1,6 @@
+<cu-custom bgColor="bg-gradual-olive" isBack="{{true}}">
+    <view slot="content">{{title}}</view>
+</cu-custom>
 <!-- 画布-生成预览区 -->
 <canvas canvas-id='preview-canvas' disable-scroll="true" style="width: 1051px;height: 1500px;left: -10000px;top: -10000px; position: fixed; z-index: -10;"></canvas>
 <!-- 预览区 -->

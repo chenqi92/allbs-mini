@@ -1,3 +1,6 @@
+<cu-custom bgColor="bg-gradual-olive" isBack="{{true}}">
+	<view slot="content">{{title}}</view>
+</cu-custom>
 <image-cropper xm_max_height="{{100}}" xk_mode="{{false}}" wx:if="{{fileSourcePath && isShow}}" id="image-cropper" disable_width="{{true}}" disable_height="{{true}}" width="{{width}}" height="{{height}}" export_scale="{{type}}" imgSrc="{{fileSourcePath}}" bindload="cropperload" min_scale="{{0.2}}" max_scale="{{3}}" bindimageload="loadimage"></image-cropper>
 <image-cropper-6cun boxRealWidth="{{boxRealWidth}}" boxRealHeight="{{boxRealHeight}}" xk_mode="{{true}}" wx:if="{{fileSourcePath && !isShow}}" id="image-cropper1" disable_width="{{true}}" disable_height="{{true}}" width="{{width}}" height="{{height}}" export_scale="{{type}}" imgSrc="{{fileSourcePath}}" bindload="cropperload" min_scale="{{0.2}}" max_scale="{{3}}" xk_mb_url="{{xk_mb_url}}" xk_mb_width="{{xk_mb_width}}" xk_mb_height="{{xk_mb_height}}" bindimageload="loadimage" mm="{{mm}}"></image-cropper-6cun>
 <!-- 底部操作按钮布局 -->

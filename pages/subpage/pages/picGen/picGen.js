@@ -10,6 +10,7 @@ Page({
         lastPic: undefined,//最终图片
         w: 0,
         h: 0,
+        title: '图片生成'
     },
 
     /**
@@ -17,11 +18,9 @@ Page({
      */
     onLoad: function (options) {
         const $ = this;
-        var type = options.type || 1;
-        var title = (type == 4 ? "A4图片" : (type == 3 ? "7寸照片" : (type == 2 ? "6寸照片" : "5寸照片"))) + "生成";
-        wx.setNavigationBarTitle({
-            title: title,
-        });
+        const type = Number(options.type) || 1;
+        const title = (type === 4 ? "A4图片" : (type === 3 ? "7寸照片" : (type === 2 ? "6寸照片" : "5寸照片"))) + "生成";
+        this.setData({title: title})
         if (!this.lastPic) {
             this.setData({isShowBottomDialog: true, type: type});
         } else {

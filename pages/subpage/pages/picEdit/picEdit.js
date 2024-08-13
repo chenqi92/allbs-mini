@@ -118,7 +118,6 @@ Page({
      * 页面的初始数据
      */
     data: {
-        serverUrl: "https://gitee.com/tiankf/images/raw/master",
         type: 1,
         fileSourcePath: '',
         optIdx: 1,//1-裁切 2-留白 3-相框
@@ -152,18 +151,16 @@ Page({
         this.data.isLoading = true;
         const type = Number(options.type);
         const fileSourcePath = options.fileSourcePath;
-        var title = (type == 4 ? "A4图片" : (type == 3 ? "7寸照片" : (type == 2 ? "6寸照片" : "5寸照片"))) + "编辑";
-        wx.setNavigationBarTitle({
-            title: title,
-        });
-        var winh = wx.getSystemInfoSync().windowHeight;
+        const title = (type === 4 ? "A4图片" : (type === 3 ? "7寸照片" : (type === 2 ? "6寸照片" : "5寸照片"))) + "编辑";
+        this.setData({title: title})
+        const winh = wx.getSystemInfoSync().windowHeight;
         if (winh < 600) {
             //比iphone6小的屏适配
             ratioEnable = true;
         }
         var wh = this.cumputeWH(type);
         this.setData({type: type, height: wh.h, width: wh.w, orgWidth: wh.w, orgHeight: wh.h});
-        if (type == 2) {
+        if (type === 2) {
             //6寸获取模板
             this.loadTpList(type);
         }
