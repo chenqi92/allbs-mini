@@ -5,13 +5,13 @@
 <view class="t-index-swiper padding-top">
 	<swiper class="t-swiper" indicator-color="rgba(255,255,255,0.4)" indicator-active-color="rgba(255,255,255,1)" circular="{{true}}" indicator-dots="{{true}}" autoplay="true" interval="5000" duration="1000">
 		<swiper-item>
-			<image bindtap="toLeap" data-idx="1" class="t-index-sp-img" src="{{'/images/banner/z1.png'}}"></image>
+			<image bindtap="toSlectPicSize" data-idx="1" class="t-index-sp-img" src="{{'/images/banner/z1.png'}}"></image>
 		</swiper-item>
 		<swiper-item>
-			<image bindtap="toLeap" data-idx="2" class="t-index-sp-img" src="{{'/images/banner/z2.png'}}"></image>
+			<image bindtap="toPicGen" data-idx="2" class="t-index-sp-img" src="{{'/images/banner/z2.png'}}"></image>
 		</swiper-item>
 		<swiper-item>
-			<image bindtap="toLeap" data-idx="3" class="t-index-sp-img" src="{{'/images/banner/z3.png'}}"></image>
+			<image bindtap="toSfz" data-idx="3" class="t-index-sp-img" src="{{'/images/banner/z3.png'}}"></image>
 		</swiper-item>
 	</swiper>
 </view>

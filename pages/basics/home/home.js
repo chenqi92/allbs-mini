@@ -17,7 +17,7 @@ Component({
         url: '/pages/subpage/pages/picGen/picGen?type=4'
       });
     },
-    toSfz:function () {
+    toSfz: function () {
       wx.navigateTo({
         url: '/pages/subpage/pages/certificates/certificates'
       });
