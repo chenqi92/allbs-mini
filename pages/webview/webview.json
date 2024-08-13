@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarLeftButton": {
+    "text": "关闭",
+    "handler": "closeWebView"
+  }
 }

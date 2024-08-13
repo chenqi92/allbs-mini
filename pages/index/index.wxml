@@ -19,7 +19,7 @@
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">其他工具</view>
+    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">证件照</view>
   </view>
   <view class="action" bindtap="NavChange" data-cur="profile">
     <view class='cuIcon-cu-image'>

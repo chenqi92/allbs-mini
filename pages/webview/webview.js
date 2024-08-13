@@ -9,6 +9,12 @@ Page({
     url: ''
   },
 
+  closeWebView() {
+    wx.navigateBack({
+      delta: 1
+    });
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -20,7 +26,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    app.data.webShowed = true;
   },
 
   /**

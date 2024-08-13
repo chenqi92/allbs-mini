@@ -11,7 +11,8 @@ const API_URLS = {
     MINIO: {
         BASE: 'minio',
         UPLOAD: 'upload',
-        REMOVE_BG: 'remove-bg'
+        REMOVE_BG: 'remove-bg',
+        GENERATE_PRE_SIGNED_URL: 'generatePreSignedUrl'
     },
     HOT: {
         BASE: 'wx/hot',
