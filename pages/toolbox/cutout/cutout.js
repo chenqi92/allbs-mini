@@ -71,7 +71,7 @@ Page({
     chooseImageFromAlbum() {
         const that = this;
         that.hideModal();
-        wx.chooseImage({
+        wx.chooseMedia({
             count: 1,
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
