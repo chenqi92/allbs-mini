@@ -29,7 +29,7 @@ Component({
                 color: 'green',
                 icon: 'magic',
                 model: 'game',
-                show: true,
+                show: false,
             },
             {
                 title: '证件照',

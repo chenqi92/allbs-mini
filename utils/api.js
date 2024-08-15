@@ -1,6 +1,6 @@
 // api.js
-//const API_BASE_URL = "https://wx.allbs.cn/";
-const API_BASE_URL = "http://192.168.1.170:8888/";
+const API_BASE_URL = "https://wx.allbs.cn/";
+//const API_BASE_URL = "http://192.168.1.170:8888/";
 const SERVER_URL = "https://nas.allbs.cn:9006";
 const PREVIEW_BASE_URL = "https://preview.allbs.cn/onlinePreview?url=";
 

@@ -7,7 +7,7 @@
         <view class="margin-top-sm">
             <text>By:allbs</text>
         </view>
-        <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+        <image src="https://nas.allbs.cn:9006/static/wave.gif" mode="scaleToFill" class="gif-wave"></image>
     </view>
     <view class="padding flex text-center text-grey bg-white shadow-warp">
         <view class="flex flex-sub flex-direction solid-right">
