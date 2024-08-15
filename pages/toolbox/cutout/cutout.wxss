@@ -423,3 +423,6 @@
     width: 108rpx;
     text-align: center;
 }
+.weui-icon-btn_more {
+    display: none;
+}
