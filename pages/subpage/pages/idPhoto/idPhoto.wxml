@@ -55,6 +55,12 @@
 </view>
 <view class="t-zjz-ms2">请将图片铺满方框并把人像对准虚线</view>
 
+<!-- 背景颜色选择按钮 -->
+<view class="padding flex flex-direction color-buttons">
+    <button bindtap="openPicker" class="cu-btn lg" style="background: #259f38 !important">选择背景颜色</button>
+</view>
+<color-picker show="{{colorPickerShow}}" defaultColor="{{defaultColor}}" bind:confirm="colorConfirm"></color-picker>
+
 <!-- 底部选择本地还是微信文件弹框 -->
 <bottom-dialog extClass="t-bd-dialog" close="closeSelectModal" maskClosable="{{true}}" closabled="{{false}}"
                show="{{isShowBottomDialog}}">

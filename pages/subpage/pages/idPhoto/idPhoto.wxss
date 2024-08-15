@@ -250,3 +250,12 @@ page {
   overflow-y: visible !important;
 }
 /* 底部弹窗样式结束 */
+.color-buttons {
+  color: #272727;
+  width: 100%;
+  position: absolute;
+  z-index: 300;
+  left: 0;
+  text-align: center;
+  top: calc(50% + 430rpx);
+}

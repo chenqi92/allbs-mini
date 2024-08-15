@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "image-cropper": "/components/image-cropper-kevy/image-cropper",
-    "bottom-dialog":"/components/half-screen-dialog/half-screen-dialog"
+    "bottom-dialog":"/components/half-screen-dialog/half-screen-dialog",
+    "color-picker": "/components/color-picker/color-picker"
   }
 }

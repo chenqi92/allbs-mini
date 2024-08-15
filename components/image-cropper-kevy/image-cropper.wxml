@@ -18,7 +18,7 @@
         </view>
         <view class='content_bottom bg_gray {{_flag_bright?"":"bg_black"}}' style="transition-property:{{_cut_animation?'':'background'}};background: {{xk_mode || export_scale==6?'#f7f7f7 !important':'rgba(0, 0, 0, 0.5) !important'}}"></view>
       </view>
-      <image wx:if="{{imgInited}}" bindload="imageLoad"  style="width: {{img_width ? img_width + 'px' : 'auto'}};height: {{img_height ? img_height + 'px' : 'auto'}};transform: translate3d( {{_img_left-img_width/2}}px, {{_img_top-img_height/2}}px, 0) scale({{scale}}) rotate({{angle}}deg);transition-duration:{{0}}s;display:{{export_scale==5&&isSfzLoad || export_scale!=5?'inline-block':'none'}}" class='img' src='{{imgSrc}}'></image>
+      <image wx:if="{{imgInited}}" bindload="imageLoad"  style="width: {{img_width ? img_width + 'px' : 'auto'}};height: {{img_height ? img_height + 'px' : 'auto'}};transform: translate3d( {{_img_left-img_width/2}}px, {{_img_top-img_height/2}}px, 0) scale({{scale}}) rotate({{angle}}deg);transition-duration:{{0}}s;display:{{export_scale==5&&isSfzLoad || export_scale!=5?'inline-block':'none'}};background-color: {{backgroundColor}};" class='img' src='{{imgSrc}}'></image>
       <view bindtouchstart="_start" bindtouchmove="_move" bindtouchend="_end"   class="t-touch-area" style="width: {{width}}px; height: {{height}}px;left:{{cut_left}}px;top: {{cut_top}}px;"></view>
       <image src="{{xk_mb_url}}" wx:if="{{xk_mb_url}}" class="t-touch-area" style="width: {{width}}px; height: {{height}}px;left:{{cut_left}}px;top: {{cut_top}}px;z-index:9;"></image>
     </view>

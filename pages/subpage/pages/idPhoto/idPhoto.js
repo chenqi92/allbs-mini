@@ -12,6 +12,20 @@ Page({
         isShowBottomDialog: false,//是否显示底部文件选择弹窗
         isScale: false,//是否缩放，针对小屏高度小于603
         resultImageSrc: '',
+        backgroundColor: '#ffffff',  // 默认背景色
+        colorPickerShow: false,
+        defaultColor: {
+            r: 0,
+            g: 0,
+            b: 255,
+            a: 1
+        },
+        rgba: {
+            r: 0,
+            g: 188,
+            b: 212,
+            a: 1
+        }
     },
 
     /**
@@ -243,4 +257,15 @@ Page({
             }
         });
     },
+    openPicker() {
+        this.setData({
+            colorPickerShow: true,
+        })
+    },
+
+    colorConfirm(event) {
+        this.setData({
+            backgroundColor: event.detail.hex
+        })
+    }
 })

@@ -1,6 +1,6 @@
 Component({
   properties: {
-    /**     
+    /**
      * 图片路径
      */
     'imgSrc': {
@@ -194,6 +194,10 @@ Component({
     'boxRealHeight': {
       type: Number,
       value: 0
+    },
+    'backgroundColor': {
+      type: String,
+      value: 'transparent'
     }
 
   },
@@ -233,6 +237,7 @@ Component({
     boxRealHeight: 0,//相框裁减区默认实际大小
     imgInited: false,//图片是否初始化
     isSfzLoad: false,//身份证是否初始化完成
+    backgroundColor: 'transparent',
     watch: {
       boxRealWidth(value, that) {
         if (value != that.data.boxRealWidth) {
@@ -362,6 +367,13 @@ Component({
         that._cutDetectionPosition();
         if (that.data.limit_move) {
           !that.data._canvas_overflow && that._draw();
+        }
+      },
+      backgroundColor(value, that) {
+        if (value != that.data.backgroundColor) {
+          that.setData({
+            backgroundColor: value
+          });
         }
       }
     }
