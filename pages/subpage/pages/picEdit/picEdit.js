@@ -170,7 +170,7 @@ Page({
                 src: fileSourcePath,
                 success: (res) => {
                     $.setData({fileSourcePath: JSON.stringify(res)}, () => {
-                        $.cropper = $.selectComponent("#image-cropper");
+                        $.loadimage();
                     });
                 },
                 fail: (err) => {
@@ -350,9 +350,6 @@ Page({
     toPx: function (d) {
         var ww = wx.getSystemInfoSync().windowWidth;
         return ww * d / 750;
-    },
-    cropperload: function () {
-        console.log("corpper加载成功");
     },
     loadimage(e) {
         console.log("图片加载成功");

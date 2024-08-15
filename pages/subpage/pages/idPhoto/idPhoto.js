@@ -6,11 +6,12 @@ Page({
      * 页面的初始数据
      */
     data: {
-        ww: wx.getAppBaseInfo().windowWidth,
-        wh: wx.getAppBaseInfo().windowHeight,
+        ww: wx.getSystemInfoSync().windowWidth,
+        wh: wx.getSystemInfoSync().windowHeight,
         zjzType: 1,//证件照类型：1-1寸 2-2寸
         isShowBottomDialog: false,//是否显示底部文件选择弹窗
         isScale: false,//是否缩放，针对小屏高度小于603
+        resultImageSrc: '',
     },
 
     /**
@@ -26,7 +27,7 @@ Page({
         wx.showLoading({
             title: '准备中请耐心等待...',
             mask: true
-        })
+        });
         const $ = this;
         const isScale = $.data.isScale;
         const w = $.toPx(isScale ? 488 * 0.9 : 488);
@@ -43,18 +44,51 @@ Page({
                 const data = JSON.parse(res.data);
                 if (data.ok) {
                     const url = data.data;
-                    wx.getImageInfo({
-                        src: url,
-                        success: (res) => {
-                            $.setData({width: w, height: h, src: JSON.stringify(res.path)}, () => {
-                                wx.hideLoading()
-                            });
+
+                    const fileName = app.utils.extractFileNameFromUrl(url);
+
+                    // 使用 wx.downloadFile 下载到临时路径
+                    wx.downloadFile({
+                        url: url,
+                        filePath: `${wx.env.USER_DATA_PATH}/${fileName}`,
+                        success: function(downloadRes) {
+                            if (downloadRes.statusCode === 200) {
+                                const tempFilePath = downloadRes.filePath;
+                                wx.getImageInfo({
+                                    src: tempFilePath,
+                                    success: (imageRes) => {
+                                        $.setData({ width: w, height: h, src: JSON.stringify(imageRes) }, () => {
+                                            $.loadimage();
+                                            wx.hideLoading();
+                                        });
+                                    },
+                                    fail: () => {
+                                        wx.hideLoading();
+                                        wx.showToast({
+                                            title: '加载图片信息失败',
+                                            icon: 'none'
+                                        });
+                                    }
+                                });
+                            } else {
+                                wx.hideLoading();
+                                wx.showToast({
+                                    title: '下载图片失败',
+                                    icon: 'none'
+                                });
+                            }
                         },
-                        fail: (res) => {
-                            wx.hideLoading()
+                        fail: () => {
+                            wx.hideLoading();
+                            wx.showToast({
+                                title: '下载图片失败',
+                                icon: 'none'
+                            });
                         }
                     });
+
                 } else {
+                    wx.hideLoading();
                     wx.showToast({
                         title: '图片处理失败',
                         icon: 'none'
@@ -62,6 +96,7 @@ Page({
                 }
             },
             fail() {
+                wx.hideLoading();
                 wx.showToast({
                     title: '请求失败',
                     icon: 'none'
