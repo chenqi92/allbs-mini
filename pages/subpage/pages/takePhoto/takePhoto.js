@@ -4,7 +4,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        ww: wx.getAppBaseInfo().windowHeight,
+        ww: wx.getSystemInfoSync().windowHeight,
         photoPic: null,//拍照照片
         sfzType: 0,//1-正面 2-反面
         hasAuthPhoto: true,//是否具有拍照权限

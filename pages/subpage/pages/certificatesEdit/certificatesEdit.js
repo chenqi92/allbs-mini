@@ -8,7 +8,7 @@ Page({
      */
     data: {
         src: '',
-        ww: wx.getAppBaseInfo().windowWidth,
+        ww: wx.getSystemInfoSync().windowWidth,
         w: 0,
         h: 0,
     },
@@ -22,7 +22,7 @@ Page({
             title: '初始化...',
             mask: true
         })
-        var winh = wx.getAppBaseInfo().windowHeight;
+        var winh = wx.getSystemInfoSync().windowHeight;
         if (winh < 600) {
             //比iphone6小的屏适配
             ratioEnable = true;
