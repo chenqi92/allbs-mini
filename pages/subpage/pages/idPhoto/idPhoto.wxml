@@ -6,7 +6,7 @@
 <image-cropper xm_max_height="{{100}}" xk_mb_url="/images/pic/idphoto/touxiang.png" xk_mode="{{false}}" wx:if="{{src}}"
                id="image-cropper" disable_width="{{true}}" disable_height="{{true}}" width="{{width}}"
                height="{{height}}" export_scale="{{6}}" imgSrc="{{src}}" min_scale="{{0.2}}" max_scale="{{3}}"
-               bindimageload="loadimage"></image-cropper>
+               bindimageload="loadimage" backgroundColor="{{backgroundColor}}"></image-cropper>
 
 <!-- 底部操作部分 -->
 <view class="t-edit-bottom">
