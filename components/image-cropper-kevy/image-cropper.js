@@ -1039,35 +1039,26 @@ Component({
         //渲染
         _draw(callback) {
             if (!this.data.imgSrc) return;
-            let draw = () => {
-                //图片实际大小
-                let img_width = this.data.img_width * this.data.scale * this.data.export_scale;
-                let img_height = this.data.img_height * this.data.scale * this.data.export_scale;
-                //canvas和图片的相对距离
-                var xpos = this.data._img_left - this.data.cut_left;
-                var ypos = this.data._img_top - this.data.cut_top;
-                //旋转画布
-                this.data.ctx.translate(xpos * this.data.export_scale, ypos * this.data.export_scale);
-                this.data.ctx.rotate(this.data.angle * Math.PI / 180);
-                this.data.ctx.drawImage(this.data.imgSrc, -img_width / 2, -img_height / 2, img_width, img_height);
-                this.data.ctx.draw(false, () => {
-                    callback && callback();
-                });
-            }
-            if (this.data.ctx.width != this.data.width || this.data.ctx.height != this.data.height) {
-                //优化拖动裁剪框，所以必须把宽高设置放在离用户触发渲染最近的地方
-                this.setData({
-                    _canvas_height: this.data.height,
-                    _canvas_width: this.data.width,
-                }, () => {
-                    //延迟40毫秒防止点击过快出现拉伸或裁剪过多
-                    setTimeout(() => {
-                        draw();
-                    }, 40);
-                });
-            } else {
-                draw();
-            }
+            const ctx = wx.createCanvasContext(this.data.el, this);
+
+            // 设置 Canvas 的背景色
+            ctx.setFillStyle(this.data.backgroundColor);
+            ctx.fillRect(0, 0, this.data.width * this.data.export_scale, this.data.height * this.data.export_scale);
+
+            // 绘制图片
+            const img_width = this.data.img_width * this.data.scale * this.data.export_scale;
+            const img_height = this.data.img_height * this.data.scale * this.data.export_scale;
+            const xpos = this.data._img_left - this.data.cut_left;
+            const ypos = this.data._img_top - this.data.cut_top;
+
+            // 旋转画布
+            ctx.translate(xpos * this.data.export_scale, ypos * this.data.export_scale);
+            ctx.rotate(this.data.angle * Math.PI / 180);
+            ctx.drawImage(this.data.imgSrc, -img_width / 2, -img_height / 2, img_width, img_height);
+
+            ctx.draw(false, () => {
+                callback && callback();
+            });
         },
         //裁剪框处理
         _cutTouchMove(e) {
