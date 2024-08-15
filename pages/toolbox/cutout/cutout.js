@@ -9,7 +9,7 @@ Page({
         bgColor: '',
         title: '',
         buttonDisabled: false,
-        modalName: '',
+        isShowBottomDialog: true,
     },
 
     onLoad(options) {
@@ -26,19 +26,11 @@ Page({
         if(this.data.loading) {
             return;
         }
-        this.setData({
-            modalName: e.currentTarget.dataset.target
-        });
-    },
-
-    hideModal(e) {
-        this.setData({
-            modalName: ''
-        });
+        this.setData({isShowBottomDialog: true})
     },
 
     chooseImageFromChat() {
-        this.hideModal();
+        this.closeSelectModal();
         const that = this;
         wx.chooseMessageFile({
             count: 1,
@@ -63,21 +55,21 @@ Page({
                         });
                     }
                 });
-                that.hideModal();
+                that.closeSelectModal();
             }
         });
     },
 
     chooseImageFromAlbum() {
         const that = this;
-        that.hideModal();
+        that.closeSelectModal();
         wx.chooseMedia({
             count: 1,
             sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
+            sourceType: ['album'],
             success(res) {
-                const tempFilePaths = res.tempFilePaths;
-                const filePath = tempFilePaths[0];
+                const tempFilePaths = res.tempFiles;
+                const filePath = tempFilePaths[0].tempFilePath;
                 wx.getFileSystemManager().getFileInfo({
                     filePath,
                     success(info) {
@@ -95,7 +87,38 @@ Page({
                         });
                     }
                 });
-                that.hideModal();
+                that.closeSelectModal();
+            }
+        });
+    },
+    chooseImageFromCamera() {
+        const that = this;
+        that.closeSelectModal();
+        wx.chooseMedia({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['camera'],
+            success(res) {
+                const tempFilePaths = res.tempFiles;
+                const filePath = tempFilePaths[0].tempFilePath;
+                wx.getFileSystemManager().getFileInfo({
+                    filePath,
+                    success(info) {
+                        const maxSize = 10 * 1024 * 1024; // 10MB
+                        if (info.size > maxSize) {
+                            wx.showToast({
+                                title: '文件大小超过10MB',
+                                icon: 'none'
+                            });
+                            return;
+                        }
+                        that.setData({
+                            imageSrc: filePath,
+                            buttonDisabled: false, // 重新上传图片后，启用按钮
+                        });
+                    }
+                });
+                that.closeSelectModal();
             }
         });
     },
@@ -201,5 +224,9 @@ Page({
                 });
             }
         });
-    }
+    },
+    //点击底部选择弹框关闭按钮
+    closeSelectModal: function () {
+        this.setData({isShowBottomDialog: false});
+    },
 });
