@@ -25,7 +25,8 @@ Page({
             g: 188,
             b: 212,
             a: 1
-        }
+        },
+        showDownloadButton: false,
     },
 
     /**
@@ -58,7 +59,6 @@ Page({
                 const data = JSON.parse(res.data);
                 if (data.ok) {
                     const url = data.data;
-
                     const fileName = app.utils.extractFileNameFromUrl(url);
 
                     // 使用 wx.downloadFile 下载到临时路径
@@ -71,7 +71,7 @@ Page({
                                 wx.getImageInfo({
                                     src: tempFilePath,
                                     success: (imageRes) => {
-                                        $.setData({ width: w, height: h, src: JSON.stringify(imageRes) }, () => {
+                                        $.setData({ width: w, height: h, src: JSON.stringify(imageRes), showDownloadButton: true }, () => {
                                             $.loadimage();
                                             wx.hideLoading();
                                         });
@@ -175,33 +175,6 @@ Page({
     closeSelectModal: function () {
         this.setData({isShowBottomDialog: false});
     },
-    //点击底部选择弹框本地或微信文件事件
-    // selectFile: function (e) {
-    //     const $ = this;
-    //     var opr = e.currentTarget.dataset.opr;
-    //     if (opr === "1") {
-    //         //微信图片
-    //         wx.chooseMessageFile({
-    //             count: 1,
-    //             type: 'image',
-    //             extension: ['png', 'jpg', 'jpeg'],
-    //             success(res) {
-    //                 $.initCroper(res.tempFiles[0].path);
-    //             }
-    //         })
-    //     } else {
-    //         //手机相册
-    //         wx.chooseMedia({
-    //             count: 1,
-    //             sizeType: ['original'],
-    //             sourceType: ['album'],
-    //             success(res) {
-    //                 $.initCroper(res.tempFiles[0].path);
-    //             }
-    //         })
-    //     }
-    //     $.closeSelectModal();
-    // },
     chooseImageFromChat() {
         this.closeSelectModal();
         const that = this;
@@ -267,5 +240,10 @@ Page({
         this.setData({
             backgroundColor: event.detail.hex
         })
+    },
+    downloadImage() {
+        const $ = this;
+        $.cropper = $.selectComponent("#image-cropper");
+        $.cropper.downloadImage();
     }
 })

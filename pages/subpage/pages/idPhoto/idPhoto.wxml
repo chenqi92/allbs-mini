@@ -56,8 +56,11 @@
 <view class="t-zjz-ms2">请将图片铺满方框并把人像对准虚线</view>
 
 <!-- 背景颜色选择按钮 -->
-<view class="padding flex flex-direction color-buttons">
-    <button bindtap="openPicker" class="cu-btn lg" style="background: #259f38 !important">选择背景颜色</button>
+<view class="padding flex color-buttons">
+    <button bindtap="openPicker" class="cu-btn lg" style="background: #259f38 !important;color: var(--white);">选择背景颜色</button>
+    <button bindtap="downloadImage" class="cu-btn lg" style="background: #3367fb !important;margin-left: 20rpx;color: var(--white);"
+            disabled="{{!showDownloadButton}}">下载图片
+    </button>
 </view>
 <color-picker show="{{colorPickerShow}}" defaultColor="{{defaultColor}}" bind:confirm="colorConfirm"></color-picker>
 
