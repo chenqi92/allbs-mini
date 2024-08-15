@@ -1,6 +1,7 @@
 // api.js
 //const API_BASE_URL = "https://wx.allbs.cn/";
 const API_BASE_URL = "http://192.168.1.170:8888/";
+const SERVER_URL = "https://nas.allbs.cn:9006";
 const PREVIEW_BASE_URL = "https://preview.allbs.cn/onlinePreview?url=";
 
 const API_URLS = {
@@ -41,4 +42,4 @@ const createApiUrls = (urls) => {
 
 const API_ENDPOINTS = createApiUrls(API_URLS);
 
-export {API_BASE_URL, API_ENDPOINTS, PREVIEW_BASE_URL};
+export {API_BASE_URL, API_ENDPOINTS, PREVIEW_BASE_URL, SERVER_URL};

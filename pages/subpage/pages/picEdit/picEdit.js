@@ -1,3 +1,6 @@
+import {SERVER_URL} from "../../../../utils/api";
+
+const app = getApp();
 var ratio = 0.9;
 var ratioEnable = false;
 var xkmbList = [{
@@ -137,6 +140,7 @@ Page({
         boxRealHeight: 0,
         resUrl: "",//测试
         isLoading: false, //是不是加载中
+        serverUrl: app.globalData.SERVER_URL,
     },
 
     /**
