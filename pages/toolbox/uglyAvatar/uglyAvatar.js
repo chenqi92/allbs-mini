@@ -394,6 +394,8 @@ Page({
             const canvas = res[0].node;
             wx.canvasToTempFilePath({
                 canvas,
+                width: this.data.canvasWidth,  // 确保传入正确的宽度
+                height: this.data.canvasHeight, // 确保传入正确的高度
                 success(res) {
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath,

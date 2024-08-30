@@ -4,7 +4,7 @@
 </cu-custom>
 <view class="container">
     <canvas type="2d" id="faceCanvas" style="width: 100%; height: 800rpx;"></canvas>
-    <view class="flex padding justify-center">
+    <view class="flex justify-center">
         <button class="cu-btn block bg-blue margin-tb-sm lg margin-right" bindtap="generateFace">
             <text class="cuIcon-refresh"></text> 随机生成
         </button>
