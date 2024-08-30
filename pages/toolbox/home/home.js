@@ -39,6 +39,14 @@ Component({
                 model: 'toolbox',
                 show: false,
             },
+            {
+              title: '缩写翻译',
+              name: 'acronymTranslator',
+              color: 'blue',
+              icon: 'icon',
+              model: 'toolbox',
+              show: true,
+          },
         ],
     },
 })

@@ -1,0 +1,47 @@
+<cu-custom bgColor="{{bgColor}}" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{title}}</view>
+</cu-custom>
+<view class="cu-chat">
+  <view  class="cu-info">
+    该页面功能用来联系互联网中的缩写词汇，比如输入缩写词汇<text class="text-blue">u1s1</text>，将会自动回复联想词<text class="text-red">有一说一</text>。
+  </view>
+  <block wx:for="{{messages}}" wx:key="index">
+    <view wx:if="{{item.type === 'self'}}" class="cu-item self">
+      <view class="main">
+        <view class="content bg-green shadow">
+          <text>{{item.content}}</text>
+        </view>
+      </view>
+      <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
+      <view class="date">词汇缩写</view>
+    </view>
+    <view wx:if="{{item.type === 'other'}}" class="cu-item">
+      <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
+      <view class="main">
+        <view class="content shadow">
+          <!-- 动态展示词汇数组为标签 -->
+          <view class="flex flex-wrap">
+            <block wx:for="{{item.translations}}" wx:key="index">
+              <view class="padding-xs">
+                <view class="cu-tag bg-{{item.color}}">{{item.text}}</view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+      <view class="date">词汇猜想</view>
+    </view>
+    <view wx:if="{{item.type === 'info'}}" class="cu-info">
+      <text class="cuIcon-roundclosefill text-red "></text> {{item.content}}
+    </view>
+  </block>
+</view>
+
+<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+  <view class="action">
+    <text class="cuIcon-comment text-grey"></text>
+  </view>
+  <input class="solid-bottom" placeholder="输入词汇缩写,如u1s1"  bindinput="onInput" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10" value="{{inputValue}}"></input>
+  <button class="cu-btn bg-green shadow" size="mini" bindtap="onSend" disabled="{{!inputValue}}">发送</button>
+</view>

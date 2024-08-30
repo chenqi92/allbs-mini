@@ -12,7 +12,8 @@
     "pages/toolbox/uglyAvatar/uglyAvatar",
     "pages/toolbox/cutout/cutout",
     "pages/random/home/home",
-    "pages/toolbox/idPhoto/idPhoto"
+    "pages/toolbox/idPhoto/idPhoto",
+    "pages/toolbox/acronymTranslator/acronymTranslator"
   ],
   "subPackages": [
     {
