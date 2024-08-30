@@ -4,7 +4,7 @@
 </cu-custom>
 <view class="cu-chat">
   <view  class="cu-info">
-    该页面功能用来联系互联网中的缩写词汇，比如输入缩写词汇<text class="text-blue">u1s1</text>，将会自动回复联想词<text class="text-red">有一说一</text>。
+    该页面功能用来联想互联网中的缩写词汇，比如输入缩写词汇<text class="text-blue">u1s1</text>，将会自动回复联想词<text class="text-red">有一说一</text>。
   </view>
   <block wx:for="{{messages}}" wx:key="index">
     <view wx:if="{{item.type === 'self'}}" class="cu-item self">
@@ -13,11 +13,11 @@
           <text>{{item.content}}</text>
         </view>
       </view>
-      <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big107000.jpg);"></view>
+      <view class="cu-avatar radius" style="background-image:url(https://nas.allbs.cn:9006/cloudpic/2024/08/4f29ff61264d8d653d9e265d7011834a.webp);"></view>
       <view class="date">词汇缩写</view>
     </view>
     <view wx:if="{{item.type === 'other'}}" class="cu-item">
-      <view class="cu-avatar radius" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
+      <view class="cu-avatar radius" style="background-image:url(https://nas.allbs.cn:9006/cloudpic/cloudpic/2024/07/88af384e698c5b47819c8be2bb3f33b8.png);"></view>
       <view class="main">
         <view class="content shadow">
           <!-- 动态展示词汇数组为标签 -->
