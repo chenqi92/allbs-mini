@@ -147,7 +147,7 @@ Component({
             this.setData({
                 modalName: target,
                 modalTitle: e.currentTarget.dataset.title || '', // 设置弹窗标题
-                modalContent: e.currentTarget.dataset.desc || '', // 设置弹窗内容
+                modalContent: e.currentTarget.dataset.desc || '', // 设置弹窗内容，确保包含 HTML 标签
                 modalCover: e.currentTarget.dataset.cover || ''  // 设置弹窗图片
             });
         },
