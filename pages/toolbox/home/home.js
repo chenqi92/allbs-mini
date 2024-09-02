@@ -40,7 +40,7 @@ Component({
                 show: false,
             },
             {
-              title: '缩写翻译',
+              title: '缩写联想',
               name: 'acronymTranslator',
               color: 'blue',
               icon: 'icon',
