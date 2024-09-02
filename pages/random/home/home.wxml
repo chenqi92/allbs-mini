@@ -12,7 +12,11 @@
     </scroll-view>
     <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx - 147rpx)" bindscroll="VerticalMain">
         <view class="padding-top padding-lr padding-lrr" wx:for="{{hotNewsList}}" wx:key="id">
-            <view class="cu-card article no-card}}">
+            <view class="cu-card article no-card" bindtap="showModal"
+                  data-target="{{item.desc ? 'Modal' : (item.cover ? 'Image' : '')}}"
+                  data-title="{{item.title}}"
+                  data-desc="{{item.desc}}"
+                  data-cover="{{item.cover}}">
                 <view class="cu-item shadow">
                     <view class="title">
                         <view class="text-cut-multiline">{{item.title}}</view>
@@ -30,4 +34,33 @@
         </view>
     </scroll-view>
 </view>
+<!-- 文本弹窗代码 -->
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">{{modalTitle}}</view>
+            <view class="action" bindtap="hideModal">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl">
+            {{modalContent}}
+        </view>
+    </view>
+</view>
 
+<!-- 图片弹窗代码 -->
+<view class="cu-modal {{modalName=='Image'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="bg-img" style="background-image: url('{{modalCover}}'); height: 200px;">
+            <view class="cu-bar justify-end text-white">
+                <view class="action" bindtap="hideModal">
+                    <text class="cuIcon-close"></text>
+                </view>
+            </view>
+        </view>
+        <view class="cu-bar bg-white">
+            <view class="action margin-0 flex-sub solid-left" bindtap="hideModal">我知道了</view>
+        </view>
+    </view>
+</view>

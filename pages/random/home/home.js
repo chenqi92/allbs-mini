@@ -15,6 +15,10 @@ Component({
         hotNewsList: [],
         hasMore: true,
         bannerList: [],
+        modalName: null,  // 控制弹窗显示状态
+        modalTitle: '',   // 弹窗标题
+        modalContent: '', // 弹窗内容
+        modalCover: ''    // 弹窗图片
     },
     attached() {
         wx.showLoading({
@@ -135,6 +139,25 @@ Component({
                     })
                 }
             })
+        },
+        showModal(e) { // 修改后的方法，接收数据
+            const target = e.currentTarget.dataset.target;
+            if (!target) return; // 如果target为空，直接返回，不显示任何弹窗
+
+            this.setData({
+                modalName: target,
+                modalTitle: e.currentTarget.dataset.title || '', // 设置弹窗标题
+                modalContent: e.currentTarget.dataset.desc || '', // 设置弹窗内容
+                modalCover: e.currentTarget.dataset.cover || ''  // 设置弹窗图片
+            });
+        },
+        hideModal() { // 隐藏弹窗
+            this.setData({
+                modalName: null,
+                modalTitle: '', // 清空弹窗标题
+                modalContent: '', // 清空弹窗内容
+                modalCover: '' // 清空弹窗图片
+            });
         },
     }
 });
