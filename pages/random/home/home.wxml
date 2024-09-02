@@ -13,7 +13,7 @@
     <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx - 147rpx)" bindscroll="VerticalMain">
         <view class="padding-top padding-lr padding-lrr" wx:for="{{hotNewsList}}" wx:key="id">
             <view class="cu-card article no-card" bindtap="showModal"
-                  data-target="{{item.desc ? 'Modal' : (item.cover ? 'Image' : '')}}"
+                  data-target="{{item.desc ? 'DialogModal1' : (item.cover ? 'Image' : '')}}"
                   data-title="{{item.title}}"
                   data-desc="{{item.desc}}"
                   data-cover="{{item.cover}}">
@@ -34,8 +34,9 @@
         </view>
     </scroll-view>
 </view>
+
 <!-- 文本弹窗代码 -->
-<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
     <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
             <view class="content">详细内容</view>
@@ -45,6 +46,9 @@
         </view>
         <view class="padding-xl">
             <rich-text nodes="{{modalContent}}"></rich-text> <!-- 使用 rich-text 渲染内容 -->
+        </view>
+        <view class="cu-bar bg-white">
+            <view class="action margin-0 flex-sub solid-left" bindtap="hideModal">关闭</view>
         </view>
     </view>
 </view>
